@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Routine Manager</title>
+  <link rel="stylesheet" th:href="@{/css/home.css}">
+</head>
+<body>
+  <div class="app-container">
+
+    <header class="header">
+      <div>
+        <p class="date">2026年5月31日（日）</p>
+        <h1>今日のルーティン</h1>
+      </div>
+      <button class="add-button">＋ ルーティン追加</button>
+    </header>
+
+    <section class="progress-card">
+      <div class="progress-info">
+        <span>今日の達成率</span>
+        <strong id="progressText">40%</strong>
+      </div>
+
+      <div class="progress-bar">
+        <div class="progress-fill" style="width: 40%;"></div>
+      </div>
+
+      <p class="progress-count">2 / 5 件 完了</p>
+    </section>
+
+    <main class="routine-list">
+      <article class="routine-item completed">
+        <label>
+          <input type="checkbox" checked />
+          <span class="checkmark"></span>
+          <div>
+            <h2>朝のストレッチ</h2>
+            <p>10分間体を動かす</p>
+          </div>
+        </label>
+      </article>
+
+      <article class="routine-item completed">
+        <label>
+          <input type="checkbox" checked />
+          <span class="checkmark"></span>
+          <div>
+            <h2>読書</h2>
+            <p>技術書を20分読む</p>
+          </div>
+        </label>
+      </article>
+
+      <article class="routine-item">
+        <label>
+          <input type="checkbox" />
+          <span class="checkmark"></span>
+          <div>
+            <h2>Java学習</h2>
+            <p>Spring Bootを1時間勉強する</p>
+          </div>
+        </label>
+      </article>
+
+      <article class="routine-item">
+        <label>
+          <input type="checkbox" />
+          <span class="checkmark"></span>
+          <div>
+            <h2>散歩</h2>
+            <p>30分歩く</p>
+          </div>
+        </label>
+      </article>
+
+      <article class="routine-item">
+        <label>
+          <input type="checkbox" />
+          <span class="checkmark"></span>
+          <div>
+            <h2>日記を書く</h2>
+            <p>今日の振り返りを記録する</p>
+          </div>
+        </label>
+      </article>
+    </main>
+
+  </div>
+
+  <script th:src="@{/js/home.js}"></script>
+</body>
+</html>
