@@ -30,3 +30,27 @@ checkboxes.forEach((checkbox) => {
 });
 
 updateProgress();
+
+// ルーティン追加モーダルの表示
+const openRoutineModalButton = document.getElementById('openRoutineModal');
+const closeRoutineModalButton = document.getElementById('closeRoutineModal');
+const cancelRoutineModalButton = document.getElementById('cancelRoutineModal');
+const routineModal = document.getElementById('routineModal');
+
+openRoutineModalButton.addEventListener('click', () => {
+  routineModal.classList.add('active');
+});
+
+closeRoutineModalButton.addEventListener('click', () => {
+  routineModal.classList.remove('active');
+});
+
+cancelRoutineModalButton.addEventListener('click', () => {
+  routineModal.classList.remove('active');
+});
+
+routineModal.addEventListener('click', (event) => {
+  if (event.target === routineModal) {
+    routineModal.classList.remove('active');
+  }
+});

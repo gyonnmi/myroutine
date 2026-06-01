@@ -20,7 +20,7 @@
       <h1>今日のルーティン</h1>
     </div>
 
-    <button class="add-button">
+    <button class="add-button" id="openRoutineModal">
       ＋ ルーティン追加
     </button>
   </header>
@@ -78,6 +78,88 @@
 
   </main>
 
+</div>
+
+<!-- ルーティン追加モーダル -->
+<div class="modal-overlay" id="routineModal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h2>ルーティン追加</h2>
+      <button class="modal-close" id="closeRoutineModal">×</button>
+    </div>
+
+    <form th:action="@{/routines}" method="post" class="routine-form">
+      <div class="form-group">
+        <label for="title">ルーティン名</label>
+        <input
+          type="text"
+          id="title"
+          name="title"
+          placeholder="例：朝のストレッチ"
+          required
+        >
+      </div>
+
+      <div class="form-group">
+        <label for="description">説明</label>
+        <textarea
+          id="description"
+          name="description"
+          placeholder="例：10分間体を動かす"
+        ></textarea>
+      </div>
+
+      <div class="form-group">
+        <label>繰り返し曜日</label>
+
+        <div class="weekday-group">
+          <label class="weekday">
+              <input type="checkbox" name="repeatDays" value="MON">
+              <span>月</span>
+          </label>
+
+          <label class="weekday">
+              <input type="checkbox" name="repeatDays" value="TUE">
+              <span>火</span>
+          </label>
+
+          <label class="weekday">
+              <input type="checkbox" name="repeatDays" value="WED">
+              <span>水</span>
+          </label>
+
+          <label class="weekday">
+              <input type="checkbox" name="repeatDays" value="THU">
+              <span>木</span>
+          </label>
+
+          <label class="weekday">
+              <input type="checkbox" name="repeatDays" value="FRI">
+              <span>金</span>
+          </label>
+
+          <label class="weekday">
+              <input type="checkbox" name="repeatDays" value="SAT">
+              <span>土</span>
+          </label>
+
+          <label class="weekday">
+              <input type="checkbox" name="repeatDays" value="SUN">
+              <span>日</span>
+          </label>
+       </div>
+      </div>
+
+      <div class="modal-actions">
+        <button type="button" class="cancel-button" id="cancelRoutineModal">
+          キャンセル
+        </button>
+        <button type="submit" class="submit-button">
+          追加する
+        </button>
+      </div>
+    </form>
+  </div>
 </div>
 
 <script th:src="@{/js/home.js}"></script>

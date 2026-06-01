@@ -9,11 +9,18 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.util.List;
 
+import com.gyonnmi.myroutine.entity.User;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
+
 @Service
 public class RoutineService {
 
     private final RoutineRepository routineRepository;
     private final RoutineLogRepository routineLogRepository;
+
+    @PersistenceContext
+    private EntityManager entityManager;
 
     public RoutineService(
             RoutineRepository routineRepository,
@@ -45,4 +52,23 @@ public class RoutineService {
 
         return (int) Math.round((double) completedCount / totalCount * 100);
     }
+
+    // 루틴 추가 메서드
+    public void addRoutine(
+        Long userId,
+        String title,
+        String description,
+        String repeatDays
+) {
+    User user = entityManager.getReference(User.class, userId);
+
+    Routine routine = new Routine();
+    routine.setUser(user);
+    routine.setTitle(title);
+    routine.setDescription(description);
+    routine.setRepeatDays(repeatDays);
+    routine.setActive(true);
+
+    routineRepository.save(routine);
+}
 }

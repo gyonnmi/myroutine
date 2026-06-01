@@ -46,4 +46,24 @@ public class Routine {
     public User getUser() {
         return user;
     }
+
+    public void setTitle(String title) {
+    this.title = title;
+}
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setRepeatDays(String repeatDays) {
+        this.repeatDays = repeatDays;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 }
