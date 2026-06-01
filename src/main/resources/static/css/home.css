@@ -35,16 +35,24 @@ h1 {
 
 .add-button {
   border: none;
-  background: #ff8d79;
+  background: #fb9e8b;
+
   color: white;
   padding: 12px 18px;
   border-radius: 14px;
   font-weight: bold;
   cursor: pointer;
+
+  transition: all 0.25s ease;
 }
 
 .add-button:hover {
-  background: #3d68df;
+  transform: translateY(-3px);
+
+  box-shadow:
+    0 12px 24px rgba(251, 158, 139, 0.3);
+
+  filter: brightness(1.05);
 }
 
 .progress-card {
@@ -63,7 +71,7 @@ h1 {
 }
 
 .progress-info strong {
-  color: #4f7cff;
+  color: #f88e79;
   font-size: 22px;
 }
 
@@ -127,8 +135,8 @@ h1 {
 }
 
 .routine-item input:checked + .checkmark {
-  background: #4f7cff;
-  border-color: #4f7cff;
+  background: #fb9e8b;
+  border-color: #fb9e8b;
 }
 
 .routine-item input:checked + .checkmark::after {
