@@ -15,13 +15,14 @@ import jakarta.persistence.PersistenceContext;
 
 @Service
 public class RoutineService {
-
     private final RoutineRepository routineRepository;
     private final RoutineLogRepository routineLogRepository;
 
+    
     @PersistenceContext
-    private EntityManager entityManager;
+    private EntityManager entityManager; // 스프링 컨테이너로부터 EntityManager를 주입받음
 
+    // 생성자
     public RoutineService(
             RoutineRepository routineRepository,
             RoutineLogRepository routineLogRepository

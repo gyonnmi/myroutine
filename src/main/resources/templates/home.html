@@ -11,6 +11,7 @@
 
 <div class="app-container">
 
+  <!-- ヘッダー -->
   <header class="header">
     <div>
       <p class="date" th:text="${today}">
@@ -25,8 +26,8 @@
     </button>
   </header>
 
+  <!-- 進捗カード -->
   <section class="progress-card">
-
     <div class="progress-info">
       <span>今日の達成率</span>
 
@@ -49,19 +50,15 @@
 
   </section>
 
+  <!-- ルーティンリスト -->
   <main class="routine-list">
-
-    <article class="routine-item"
-             th:each="routine : ${routines}">
-
+    <article class="routine-item" th:each="routine : ${routines}">
       <label>
-
         <input type="checkbox">
-
         <span class="checkmark"></span>
 
-        <div>
-
+        <!-- ルーティン情報 -->
+        <div class="routine-info">
           <h2 th:text="${routine.title}">
             ルーティン名
           </h2>
@@ -69,15 +66,20 @@
           <p th:text="${routine.description}">
             ルーティン説明
           </p>
-
         </div>
 
+        <div class="day-list">
+          <span th:class="'day-badge day-' + ${day}"
+                th:each="day : ${routine.dayList}"
+                th:text="${day}">
+          </span>
+        </div>
       </label>
-
+        
     </article>
-
   </main>
 
+  
 </div>
 
 <!-- ルーティン追加モーダル -->
@@ -88,6 +90,7 @@
       <button class="modal-close" id="closeRoutineModal">×</button>
     </div>
 
+    <!-- ルーティン追加フォーム -->
     <form th:action="@{/routines}" method="post" class="routine-form">
       <div class="form-group">
         <label for="title">ルーティン名</label>

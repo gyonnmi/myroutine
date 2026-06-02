@@ -114,10 +114,71 @@ h1 {
   align-items: center;
   gap: 16px;
   cursor: pointer;
+  width: 100%;
 }
 
 .routine-item input {
   display: none;
+}
+
+.routine-info {
+  flex: 1;
+}
+
+.day-list {
+    display: flex;
+    gap: 4px;
+    margin-left: auto;
+}
+
+.day-badge {
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-size: 12px;
+    font-weight: 700;
+
+    border: 1px solid rgba(255,255,255,0.7);
+}
+
+.day-月 {
+    background: #ffd6e7;
+    color: #d85b8c;
+}
+
+.day-火 {
+    background: #ffe0c7;
+    color: #e67e4f;
+}
+
+.day-水 {
+    background: #d8f0ff;
+    color: #4b9ed6;
+}
+
+.day-木 {
+    background: #dff7e3;
+    color: #58a66a;
+}
+
+.day-金 {
+    background: #fff4c9;
+    color: #c9a227;
+}
+
+.day-土 {
+    background: #e8dcff;
+    color: #8a69d6;
+}
+
+.day-日 {
+    background: #ffd9d6;
+    color: #dd6b63;
 }
 
 .checkmark {
