@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class RoutineController {
@@ -32,6 +33,7 @@ public class RoutineController {
         return "redirect:/";
     }
 
+    // 기존 루틴을 수정하는 메서드
     @PostMapping("/routines/{id}/edit")
     public String updateRoutine(
             @PathVariable Long id,
@@ -45,10 +47,21 @@ public class RoutineController {
         return "redirect:/";
     }
 
+    // 기존 루틴을 삭제하는 메서드
     @PostMapping("/routines/{id}/delete")
     public String deleteRoutine(@PathVariable Long id) {
         routineService.deleteRoutine(id);
 
         return "redirect:/";
+    }
+
+    // 루틴의 완료 상태를 업데이트하는 메서드
+    @PostMapping("/routines/{id}/complete")
+    @ResponseBody
+    public void updateCompleted(
+            @PathVariable Long id,
+            @RequestParam boolean completed
+    ) {
+        routineService.updateRoutineCompleted(id, completed);
     }
 }

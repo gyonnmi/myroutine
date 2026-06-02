@@ -51,10 +51,12 @@
 
     <!-- ルーティンリスト -->
     <main class="routine-list">
-      <article class="routine-item" th:each="routine : ${routines}">
+      <article class="routine-item" th:each="routine : ${routines}"
+        th:classappend="${completedRoutineIds.contains(routine.id)} ? 'completed'">
         <label>
           <!-- チェックボックス -->
-          <input type="checkbox">
+          <input type="checkbox" class="routine-checkbox" th:data-id="${routine.id}"
+            th:checked="${completedRoutineIds.contains(routine.id)}">
           <span class="checkmark"></span>
 
           <!-- ルーティン情報 -->

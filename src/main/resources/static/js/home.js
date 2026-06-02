@@ -26,10 +26,23 @@ function updateProgress() {
 }
 
 checkboxes.forEach((checkbox) => {
-  checkbox.addEventListener('change', updateProgress);
+  checkbox.addEventListener('change', () => {
+    const routineId = checkbox.dataset.id;
+    const completed = checkbox.checked;
+
+    fetch(`/routines/${routineId}/complete`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+      body: `completed=${completed}`
+    });
+
+    updateProgress();
+  });
 });
 
-updateProgress();
+// updateProgress();
 
 // モーダル関連
 const openRoutineModalButton = document.getElementById('openRoutineModal');

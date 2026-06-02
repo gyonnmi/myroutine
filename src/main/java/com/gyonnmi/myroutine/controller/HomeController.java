@@ -26,7 +26,8 @@ public class HomeController {
         Long userId = 1L; // 실제 애플리케이션에서는 인증된 사용자 ID를 가져와야 함. 임시 데이터
     
         List<Routine> routines = routineService.getTodayRoutines(userId); // 오늘의 루틴 목록을 가져옴
-    
+        List<Long> completedRoutineIds = routineService.getCompletedRoutineIds(userId); // 오늘 완료된 루틴의 ID 목록을 가져옴
+        
         int totalCount = routines.size(); // 오늘의 루틴 총 개수
         int completedCount = routineService.getCompletedCount(userId); // 오늘 완료된 루틴 개수
         int achievementRate = routineService.getAchievementRate(userId); // 오늘 달성률 계산
@@ -41,6 +42,7 @@ public class HomeController {
         model.addAttribute("totalCount", totalCount);
         model.addAttribute("completedCount", completedCount);
         model.addAttribute("achievementRate", achievementRate);
+        model.addAttribute("completedRoutineIds", completedRoutineIds);
 
         return "home";
     }

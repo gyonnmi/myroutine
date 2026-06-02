@@ -8,7 +8,7 @@ import java.time.LocalDate;
 public class RoutineLog {
 
     @Id // 기본키(Primary Key) 지정
-    @GeneratedValue(strategy = GenerationType.IDENTITY) //AUTO_INCREMENT
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // AUTO_INCREMENT
     private Long id;
 
     @Column(name = "routine_date") // DB의 routine_date 컬럼과 연결
@@ -28,5 +28,13 @@ public class RoutineLog {
 
     public Routine getRoutine() {
         return routine;
+    }
+
+    public void setRoutineDate(LocalDate routineDate) {
+        this.routineDate = routineDate;
+    }
+
+    public void setRoutine(Routine routine) {
+        this.routine = routine;
     }
 }

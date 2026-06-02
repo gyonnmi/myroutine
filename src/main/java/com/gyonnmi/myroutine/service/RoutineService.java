@@ -5,8 +5,10 @@ import com.gyonnmi.myroutine.entity.RoutineLog;
 import com.gyonnmi.myroutine.repository.RoutineLogRepository;
 import com.gyonnmi.myroutine.repository.RoutineRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
 
@@ -113,5 +115,48 @@ public class RoutineService {
         routine.setActive(false);
 
         routineRepository.save(routine);
+    }
+
+    public LocalDate getRoutineDate() {
+        return LocalDateTime.now()
+                .minusHours(4)
+                .toLocalDate();
+    }
+
+    public boolean isCompletedToday(Long routineId) {
+        return routineLogRepository.existsByRoutine_IdAndRoutineDate(
+                routineId,
+                getRoutineDate());
+    }
+
+    @Transactional
+    public void updateRoutineCompleted(Long routineId, boolean completed) {
+        LocalDate routineDate = getRoutineDate();
+
+        boolean alreadyCompleted = routineLogRepository.existsByRoutine_IdAndRoutineDate(routineId, routineDate);
+
+        if (completed && !alreadyCompleted) {
+            Routine routine = routineRepository.findById(routineId)
+                    .orElseThrow(() -> new IllegalArgumentException("ルーティンが見つかりません。"));
+
+            RoutineLog routineLog = new RoutineLog();
+            routineLog.setRoutine(routine);
+            routineLog.setRoutineDate(routineDate);
+
+            routineLogRepository.save(routineLog);
+        }
+
+        if (!completed && alreadyCompleted) {
+            routineLogRepository.deleteByRoutine_IdAndRoutineDate(routineId, routineDate);
+        }
+    }
+
+    // 오늘 완료된 루틴의 ID 목록을 가져오는 메서드
+    public List<Long> getCompletedRoutineIds(Long userId) {
+        return routineLogRepository
+                .findByRoutine_User_IdAndRoutineDate(userId, getRoutineDate())
+                .stream()
+                .map(log -> log.getRoutine().getId())
+                .toList();
     }
 }
