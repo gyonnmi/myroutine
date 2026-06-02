@@ -104,4 +104,14 @@ public class RoutineService {
 
         routineRepository.save(routine);
     }
+
+    // 루틴 삭제 메서드
+    public void deleteRoutine(Long routineId) {
+        Routine routine = routineRepository.findById(routineId)
+                .orElseThrow(() -> new IllegalArgumentException("ルーティンが見つかりません。"));
+
+        routine.setActive(false);
+
+        routineRepository.save(routine);
+    }
 }

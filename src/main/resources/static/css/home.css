@@ -388,9 +388,39 @@ h1 {
 
 .modal-actions {
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
+  align-items: center;
   gap: 10px;
   margin-top: 8px;
+}
+
+.right-actions {
+  display: flex;
+  gap: 10px;
+  margin-left: auto;
+}
+
+.delete-button {
+  border: none;
+  padding: 11px 16px;
+  border-radius: 14px;
+  font-weight: bold;
+  cursor: pointer;
+
+  background: #fff1f1;
+  color: #d85c5c;
+
+  transition: all 0.25s ease;
+}
+
+.delete-button:hover {
+  transform: translateY(-2px);
+  background: #ffe4e4;
+  box-shadow: 0 8px 16px rgba(216, 92, 92, 0.18);
+}
+
+.delete-button:active {
+  transform: translateY(0);
 }
 
 .cancel-button,

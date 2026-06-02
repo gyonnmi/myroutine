@@ -31,7 +31,7 @@ checkboxes.forEach((checkbox) => {
 
 updateProgress();
 
-// ルーティン追加モーダルの表示
+// モーダル関連
 const openRoutineModalButton = document.getElementById('openRoutineModal');
 const closeRoutineModalButton = document.getElementById('closeRoutineModal');
 const cancelRoutineModalButton = document.getElementById('cancelRoutineModal');
@@ -43,6 +43,7 @@ const titleInput = document.getElementById('title');
 const descriptionInput = document.getElementById('description');
 const modalTitle = document.getElementById('modalTitle');
 const submitButton = document.getElementById('submitButton');
+const deleteRoutineButton = document.getElementById('deleteRoutineButton');
 
 const weekdayCheckboxes = document.querySelectorAll('.weekday input[type="checkbox"]');
 const routineTitles = document.querySelectorAll('.routine-title');
@@ -52,6 +53,10 @@ function openAddModal() {
   routineIdInput.value = '';
   titleInput.value = '';
   descriptionInput.value = '';
+
+  if (deleteRoutineButton) {
+    deleteRoutineButton.style.display = 'none';
+  }
 
   weekdayCheckboxes.forEach((checkbox) => {
     checkbox.checked = false;
@@ -79,6 +84,11 @@ function openEditModal(routineTitle) {
     checkbox.checked = repeatDays.split(',').includes(checkbox.value);
   });
 
+  if (deleteRoutineButton) {
+    deleteRoutineButton.style.display = 'inline-block';
+    deleteRoutineButton.dataset.id = routineId;
+  }
+
   modalTitle.textContent = 'ルーティン編集';
   submitButton.textContent = '更新する';
 
@@ -104,3 +114,20 @@ routineModal.addEventListener('click', (event) => {
     closeModal();
   }
 });
+
+if (deleteRoutineButton) {
+  deleteRoutineButton.addEventListener('click', () => {
+    const routineId = deleteRoutineButton.dataset.id;
+
+    if (!confirm('このルーティンを削除しますか？')) {
+      return;
+    }
+
+    const deleteForm = document.createElement('form');
+    deleteForm.method = 'post';
+    deleteForm.action = `/routines/${routineId}/delete`;
+
+    document.body.appendChild(deleteForm);
+    deleteForm.submit();
+  });
+}

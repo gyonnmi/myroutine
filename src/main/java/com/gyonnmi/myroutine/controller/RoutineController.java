@@ -44,4 +44,11 @@ public class RoutineController {
 
         return "redirect:/";
     }
+
+    @PostMapping("/routines/{id}/delete")
+    public String deleteRoutine(@PathVariable Long id) {
+        routineService.deleteRoutine(id);
+
+        return "redirect:/";
+    }
 }
