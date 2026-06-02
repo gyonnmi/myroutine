@@ -7,6 +7,7 @@ import com.gyonnmi.myroutine.repository.RoutineRepository;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.Arrays;
 import java.util.List;
 
 import com.gyonnmi.myroutine.entity.User;
@@ -31,8 +32,26 @@ public class RoutineService {
         this.routineLogRepository = routineLogRepository;
     }
 
+    // 오늘의 루틴 목록을 가져오는 메서드
     public List<Routine> getTodayRoutines(Long userId) {
-        return routineRepository.findByUser_IdAndActiveTrue(userId);
+
+    // 오늘의 요일을 문자열로 변환 (예: "MON", "TUE", ...)
+    String today = switch (LocalDate.now().getDayOfWeek()) {
+        case MONDAY -> "MON";
+        case TUESDAY -> "TUE";
+        case WEDNESDAY -> "WED";
+        case THURSDAY -> "THU";
+        case FRIDAY -> "FRI";
+        case SATURDAY -> "SAT";
+        case SUNDAY -> "SUN";
+    };
+
+    // 사용자 ID와 활성화된 루틴을 가져온 후, 오늘의 요일이 포함된 루틴만 필터링하여 반환
+    return routineRepository.findByUser_IdAndActiveTrue(userId)
+            .stream()
+            .filter(routine -> routine.getRepeatDays() != null)
+            .filter(routine -> Arrays.asList(routine.getRepeatDays().split(",")).contains(today))
+            .toList();
     }
 
     public List<RoutineLog> getTodayLogs(Long userId) {
