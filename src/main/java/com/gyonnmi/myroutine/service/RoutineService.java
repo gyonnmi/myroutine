@@ -19,15 +19,13 @@ public class RoutineService {
     private final RoutineRepository routineRepository;
     private final RoutineLogRepository routineLogRepository;
 
-    
     @PersistenceContext
     private EntityManager entityManager; // 스프링 컨테이너로부터 EntityManager를 주입받음
 
     // 생성자
     public RoutineService(
             RoutineRepository routineRepository,
-            RoutineLogRepository routineLogRepository
-    ) {
+            RoutineLogRepository routineLogRepository) {
         this.routineRepository = routineRepository;
         this.routineLogRepository = routineLogRepository;
     }
@@ -35,23 +33,23 @@ public class RoutineService {
     // 오늘의 루틴 목록을 가져오는 메서드
     public List<Routine> getTodayRoutines(Long userId) {
 
-    // 오늘의 요일을 문자열로 변환 (예: "MON", "TUE", ...)
-    String today = switch (LocalDate.now().getDayOfWeek()) {
-        case MONDAY -> "MON";
-        case TUESDAY -> "TUE";
-        case WEDNESDAY -> "WED";
-        case THURSDAY -> "THU";
-        case FRIDAY -> "FRI";
-        case SATURDAY -> "SAT";
-        case SUNDAY -> "SUN";
-    };
+        // 오늘의 요일을 문자열로 변환 (예: "MON", "TUE", ...)
+        String today = switch (LocalDate.now().getDayOfWeek()) {
+            case MONDAY -> "MON";
+            case TUESDAY -> "TUE";
+            case WEDNESDAY -> "WED";
+            case THURSDAY -> "THU";
+            case FRIDAY -> "FRI";
+            case SATURDAY -> "SAT";
+            case SUNDAY -> "SUN";
+        };
 
-    // 사용자 ID와 활성화된 루틴을 가져온 후, 오늘의 요일이 포함된 루틴만 필터링하여 반환
-    return routineRepository.findByUser_IdAndActiveTrue(userId)
-            .stream()
-            .filter(routine -> routine.getRepeatDays() != null)
-            .filter(routine -> Arrays.asList(routine.getRepeatDays().split(",")).contains(today))
-            .toList();
+        // 사용자 ID와 활성화된 루틴을 가져온 후, 오늘의 요일이 포함된 루틴만 필터링하여 반환
+        return routineRepository.findByUser_IdAndActiveTrue(userId)
+                .stream()
+                .filter(routine -> routine.getRepeatDays() != null)
+                .filter(routine -> Arrays.asList(routine.getRepeatDays().split(",")).contains(today))
+                .toList();
     }
 
     public List<RoutineLog> getTodayLogs(Long userId) {
@@ -75,20 +73,35 @@ public class RoutineService {
 
     // 루틴 추가 메서드
     public void addRoutine(
-        Long userId,
-        String title,
-        String description,
-        String repeatDays
-) {
-    User user = entityManager.getReference(User.class, userId);
+            Long userId,
+            String title,
+            String description,
+            String repeatDays) {
+        User user = entityManager.getReference(User.class, userId);
 
-    Routine routine = new Routine();
-    routine.setUser(user);
-    routine.setTitle(title);
-    routine.setDescription(description);
-    routine.setRepeatDays(repeatDays);
-    routine.setActive(true);
+        Routine routine = new Routine();
+        routine.setUser(user);
+        routine.setTitle(title);
+        routine.setDescription(description);
+        routine.setRepeatDays(repeatDays);
+        routine.setActive(true);
 
-    routineRepository.save(routine);
-}
+        routineRepository.save(routine);
+    }
+
+    // 루틴 업데이트 메서드
+    public void updateRoutine(
+            Long routineId,
+            String title,
+            String description,
+            String repeatDays) {
+        Routine routine = routineRepository.findById(routineId)
+                .orElseThrow(() -> new IllegalArgumentException("ルーティンが見つかりません。"));
+
+        routine.setTitle(title);
+        routine.setDescription(description);
+        routine.setRepeatDays(repeatDays);
+
+        routineRepository.save(routine);
+    }
 }

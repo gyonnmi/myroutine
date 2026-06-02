@@ -126,59 +126,59 @@ h1 {
 }
 
 .day-list {
-    display: flex;
-    gap: 4px;
-    margin-left: auto;
+  display: flex;
+  gap: 4px;
+  margin-left: auto;
 }
 
 .day-badge {
-    width: 26px;
-    height: 26px;
-    border-radius: 50%;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
 
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
-    font-size: 12px;
-    font-weight: 700;
+  font-size: 12px;
+  font-weight: 700;
 
-    border: 1px solid rgba(255,255,255,0.7);
+  border: 1px solid rgba(255, 255, 255, 0.7);
 }
 
 .day-月 {
-    background: #ffd6e7;
-    color: #d85b8c;
+  background: #ffd6e7;
+  color: #d85b8c;
 }
 
 .day-火 {
-    background: #ffe0c7;
-    color: #e67e4f;
+  background: #ffe0c7;
+  color: #e67e4f;
 }
 
 .day-水 {
-    background: #d8f0ff;
-    color: #4b9ed6;
+  background: #d8f0ff;
+  color: #4b9ed6;
 }
 
 .day-木 {
-    background: #dff7e3;
-    color: #58a66a;
+  background: #dff7e3;
+  color: #58a66a;
 }
 
 .day-金 {
-    background: #fff4c9;
-    color: #c9a227;
+  background: #fff4c9;
+  color: #c9a227;
 }
 
 .day-土 {
-    background: #e8dcff;
-    color: #8a69d6;
+  background: #e8dcff;
+  color: #8a69d6;
 }
 
 .day-日 {
-    background: #ffd9d6;
-    color: #dd6b63;
+  background: #ffd9d6;
+  color: #dd6b63;
 }
 
 .checkmark {
@@ -190,12 +190,12 @@ h1 {
   flex-shrink: 0;
 }
 
-.routine-item input:checked + .checkmark {
+.routine-item input:checked+.checkmark {
   background: #fb9e8b;
   border-color: #fb9e8b;
 }
 
-.routine-item input:checked + .checkmark::after {
+.routine-item input:checked+.checkmark::after {
   content: "✓";
   color: white;
   font-size: 16px;
@@ -280,6 +280,14 @@ h1 {
   border-radius: 50%;
   font-size: 22px;
   cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.modal-close:hover {
+  transform: translateY(-2px);
+  background: #ffe0d8;
+  color: #b06e63;
+  box-shadow: 0 6px 12px rgba(197, 138, 125, 0.2);
 }
 
 .routine-form {
@@ -322,6 +330,15 @@ h1 {
   box-shadow: 0 0 0 3px rgba(251, 158, 139, 0.18);
 }
 
+.routine-title {
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.routine-title:hover {
+  color: #fb9e8b;
+}
+
 /* 曜日選択 */
 .weekday-group {
   display: flex;
@@ -351,10 +368,22 @@ h1 {
   transition: 0.2s ease;
 }
 
-.weekday input[type="checkbox"]:checked + span {
+.weekday:hover span {
+  transform: translateY(-2px);
+
+  background: #fff1ed;
+
+  box-shadow: 0 6px 12px rgba(251, 158, 139, 0.15);
+}
+
+.weekday input[type="checkbox"]:checked+span {
   background: #fb9e8b;
   color: white;
   box-shadow: 0 0 8px rgba(251, 158, 139, 0.35);
+}
+
+.weekday:active span {
+  transform: translateY(0);
 }
 
 .modal-actions {
@@ -371,6 +400,8 @@ h1 {
   border-radius: 14px;
   font-weight: bold;
   cursor: pointer;
+
+  transition: all 0.25s ease;
 }
 
 .cancel-button {
@@ -378,10 +409,29 @@ h1 {
   color: #7b625c;
 }
 
+.cancel-button:hover {
+  transform: translateY(-2px);
+
+  background: #efe7e4;
+
+  box-shadow: 0 6px 12px rgba(123, 98, 92, 0.12);
+}
+
 .submit-button {
-  background: linear-gradient(135deg, #fb9e8b, #ffb6a3);
+  background: #fb9e8b;
   color: white;
+
   box-shadow: 0 8px 18px rgba(251, 158, 139, 0.28);
+}
+
+.submit-button:hover {
+  transform: translateY(-2px);
+
+  background: #f88e79;
+
+  box-shadow: 0 12px 24px rgba(251, 158, 139, 0.35);
+
+  filter: brightness(1.03);
 }
 
 @media (max-width: 600px) {

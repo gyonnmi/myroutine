@@ -37,20 +37,70 @@ const closeRoutineModalButton = document.getElementById('closeRoutineModal');
 const cancelRoutineModalButton = document.getElementById('cancelRoutineModal');
 const routineModal = document.getElementById('routineModal');
 
-openRoutineModalButton.addEventListener('click', () => {
+const routineForm = document.getElementById('routineForm');
+const routineIdInput = document.getElementById('routineId');
+const titleInput = document.getElementById('title');
+const descriptionInput = document.getElementById('description');
+const modalTitle = document.getElementById('modalTitle');
+const submitButton = document.getElementById('submitButton');
+
+const weekdayCheckboxes = document.querySelectorAll('.weekday input[type="checkbox"]');
+const routineTitles = document.querySelectorAll('.routine-title');
+
+function openAddModal() {
+  routineForm.action = '/routines';
+  routineIdInput.value = '';
+  titleInput.value = '';
+  descriptionInput.value = '';
+
+  weekdayCheckboxes.forEach((checkbox) => {
+    checkbox.checked = false;
+  });
+
+  modalTitle.textContent = 'ルーティン追加';
+  submitButton.textContent = '追加する';
+
   routineModal.classList.add('active');
-});
+}
 
-closeRoutineModalButton.addEventListener('click', () => {
-  routineModal.classList.remove('active');
-});
+function openEditModal(routineTitle) {
+  const routineId = routineTitle.dataset.id;
+  const title = routineTitle.dataset.title;
+  const description = routineTitle.dataset.description || '';
+  const repeatDays = routineTitle.dataset.repeatDays || '';
 
-cancelRoutineModalButton.addEventListener('click', () => {
+  routineForm.action = `/routines/${routineId}/edit`;
+
+  routineIdInput.value = routineId;
+  titleInput.value = title;
+  descriptionInput.value = description;
+
+  weekdayCheckboxes.forEach((checkbox) => {
+    checkbox.checked = repeatDays.split(',').includes(checkbox.value);
+  });
+
+  modalTitle.textContent = 'ルーティン編集';
+  submitButton.textContent = '更新する';
+
+  routineModal.classList.add('active');
+}
+
+function closeModal() {
   routineModal.classList.remove('active');
+}
+
+openRoutineModalButton.addEventListener('click', openAddModal);
+closeRoutineModalButton.addEventListener('click', closeModal);
+cancelRoutineModalButton.addEventListener('click', closeModal);
+
+routineTitles.forEach((routineTitle) => {
+  routineTitle.addEventListener('click', () => {
+    openEditModal(routineTitle);
+  });
 });
 
 routineModal.addEventListener('click', (event) => {
   if (event.target === routineModal) {
-    routineModal.classList.remove('active');
+    closeModal();
   }
 });
