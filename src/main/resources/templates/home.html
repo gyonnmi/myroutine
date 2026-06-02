@@ -54,6 +54,7 @@
   <main class="routine-list">
     <article class="routine-item" th:each="routine : ${routines}">
       <label>
+        <!-- チェックボックス -->
         <input type="checkbox">
         <span class="checkmark"></span>
 
@@ -68,6 +69,7 @@
           </p>
         </div>
 
+        <!-- 繰り返し曜日 -->
         <div class="day-list">
           <span th:class="'day-badge day-' + ${day}"
                 th:each="day : ${routine.dayList}"
@@ -78,8 +80,6 @@
         
     </article>
   </main>
-
-  
 </div>
 
 <!-- ルーティン追加モーダル -->
@@ -153,6 +153,7 @@
        </div>
       </div>
 
+      <!-- モーダル操作ボタン -->
       <div class="modal-actions">
         <button type="button" class="cancel-button" id="cancelRoutineModal">
           キャンセル
