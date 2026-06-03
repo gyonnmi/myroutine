@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>MyRoutine</title>
+    <link rel="stylesheet" th:href="@{/css/signup.css}">
+</head>
+
+<body>
+
+    <div class="signup-container">
+
+        <h1 class="signup-title">会員登録</h1>
+
+        <form th:action="@{/signup}" method="post">
+
+            <div class="form-group">
+                <label>ユーザーID</label>
+                <input type="text" name="username" required>
+            </div>
+
+            <div class="form-group">
+                <label>パスワード</label>
+                <input type="password" name="password" required>
+            </div>
+
+            <div class="form-group">
+                <label>ニックネーム</label>
+                <input type="text" name="nickname" required>
+            </div>
+
+            <button type="submit" class="signup-button">
+                登録する
+            </button>
+
+        </form>
+
+        <div class="login-link">
+            <a th:href="@{/login}">
+                ログイン画面へ
+            </a>
+        </div>
+
+    </div>
+
+</body>
+
+</html>
