@@ -129,24 +129,71 @@ public class RoutineService {
                 getRoutineDate());
     }
 
+    // 루틴의 완료 상태를 업데이트하는 메서드
     @Transactional
     public void updateRoutineCompleted(Long routineId, boolean completed) {
         LocalDate routineDate = getRoutineDate();
 
+        /*
+         * 해당 루틴이 오늘 이미 완료 처리되어 있는지 확인
+         *
+         * routine_logs 테이블에
+         * routine_id와 routine_date가 같은 데이터가 있으면 true,
+         * 없으면 false를 반환
+         */
         boolean alreadyCompleted = routineLogRepository.existsByRoutine_IdAndRoutineDate(routineId, routineDate);
 
+        /*
+         * 체크박스를 체크한 경우
+         *
+         * completed == true
+         * alreadyCompleted == false
+         *
+         * 사용자가 루틴을 완료했지만
+         * 아직 DB에 완료 이력이 없는 상태라면
+         * routine_logs 테이블에 새 완료 이력을 저장
+         */
         if (completed && !alreadyCompleted) {
+            /*
+             * routines 테이블에서 해당 루틴을 조회.
+             *
+             * 존재하지 않는 루틴 ID가 들어오면 예외를 발생시킴.
+             */
             Routine routine = routineRepository.findById(routineId)
                     .orElseThrow(() -> new IllegalArgumentException("ルーティンが見つかりません。"));
 
+            /*
+             * 새 완료 이력 객체를 생성.
+             *
+             * routine에는 완료한 루틴 정보,
+             * routineDate에는 완료 날짜를 저장
+             */
             RoutineLog routineLog = new RoutineLog();
             routineLog.setRoutine(routine);
             routineLog.setRoutineDate(routineDate);
 
+            /*
+             * routine_logs 테이블에 INSERT
+             *
+             * 이 시점부터 새로고침해도
+             * 해당 루틴은 완료 상태로 다시 표시될 수 있음.
+             */
             routineLogRepository.save(routineLog);
         }
 
+        /*
+         * 체크박스를 해제한 경우
+         *
+         * completed == false
+         * alreadyCompleted == true
+         *
+         * 사용자가 완료 상태를 취소했고 DB에 완료 이력이 존재한다면
+         * routine_logs 테이블에서 해당 이력을 삭제합니다.
+         */
         if (!completed && alreadyCompleted) {
+            /*
+             * 해당 루틴의 오늘 완료 이력을 삭제.
+             */
             routineLogRepository.deleteByRoutine_IdAndRoutineDate(routineId, routineDate);
         }
     }
