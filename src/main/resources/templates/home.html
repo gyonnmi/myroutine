@@ -97,7 +97,9 @@
 
         <div class="form-group">
           <label for="title">ルーティン名</label>
-          <input type="text" id="title" name="title" placeholder="例：朝のストレッチ" required>
+          <!-- <input type="text" id="title" name="title" placeholder="例：朝のストレッチ" required> -->
+          <input type="text" id="title" name="title" placeholder="例：朝のストレッチ" required
+            oninvalid="this.setCustomValidity('ルーティン名を入力してください。')" oninput="this.setCustomValidity('')">
         </div>
 
         <div class="form-group">
@@ -145,6 +147,9 @@
             </label>
           </div>
         </div>
+
+        <!-- 繰り返し曜日バリデーション用 -->
+        <input type="text" id="repeatDaysValidator" required tabindex="-1" class="repeat-days-validator">
 
         <!-- モーダル操作ボタン -->
         <div class="modal-actions">

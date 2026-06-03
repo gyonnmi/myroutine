@@ -386,6 +386,16 @@ h1 {
   transform: translateY(0);
 }
 
+.repeat-days-validator {
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+
+  position: relative;
+  left: 20px;
+  top: -20px;
+}
+
 .modal-actions {
   display: flex;
   justify-content: space-between;
