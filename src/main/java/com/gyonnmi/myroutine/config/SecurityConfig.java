@@ -18,11 +18,15 @@ public class SecurityConfig {
                         .requestMatchers(
                                 "/css/**",
                                 "/js/**",
-                                "/signup")
+                                "/signup",
+                                "/login")
                         .permitAll()
                         .anyRequest().authenticated())
                 .formLogin(form -> form
+                        .loginPage("/login")
+                        .loginProcessingUrl("/login")
                         .defaultSuccessUrl("/", true)
+                        .failureUrl("/login?error")
                         .permitAll())
                 .logout(logout -> logout
                         .logoutUrl("/logout")
