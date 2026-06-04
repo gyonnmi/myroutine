@@ -18,8 +18,9 @@ import java.util.Locale;
 @Controller
 public class HomeController {
 
-    private final RoutineService routineService;
-    private final UserRepository userRepository;
+    // 필드
+    private final RoutineService routineService; // 루틴 관련 비즈니스 로직을 처리하는 서비스
+    private final UserRepository userRepository; // 사용자 정보를 데이터베이스에서 조회하기 위한 리포지토리
 
     // 생성자
     public HomeController(
@@ -32,14 +33,14 @@ public class HomeController {
 
     @GetMapping("/")
     public String home(Model model, Authentication authentication) {
-        String username = authentication.getName(); // 현재 로그인한 사용자의 이름(아이디) 가져오기
-        
+        String username = authentication.getName(); // 현재 로그인한 사용자의 username(ID) 가져오기
+
         User user = userRepository.findByUsername(username)
-                .orElseThrow();
+                .orElseThrow(); // username으로 User 엔티티 조회, 없으면 예외 발생
 
-        Long userId = user.getId();
+        Long userId = user.getId(); // User 엔티티에서 사용자 ID 가져오기
 
-        model.addAttribute("nickname", user.getNickname());
+        model.addAttribute("nickname", user.getNickname()); // 모델에 사용자 닉네임 추가하여 뷰로 전달
 
         List<Routine> routines = routineService.getTodayRoutines(userId); // 오늘의 루틴 목록을 가져옴
         List<Long> completedRoutineIds = routineService.getCompletedRoutineIds(userId); // 오늘 완료된 루틴의 ID 목록을 가져옴

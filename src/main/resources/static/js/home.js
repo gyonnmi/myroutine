@@ -143,7 +143,7 @@ routineModal.addEventListener('click', (event) => {
   }
 });
 
-//
+// 루틴 삭제 버튼 클릭 시 삭제 폼 제출
 deleteRoutineButton.addEventListener('click', () => {
   const routineId = deleteRoutineButton.dataset.id;
 
