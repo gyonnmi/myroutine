@@ -6,6 +6,10 @@ import com.gyonnmi.myroutine.repository.RoutineRepository;
 import com.gyonnmi.myroutine.repository.UserRepository;
 import com.gyonnmi.myroutine.service.RoutineService;
 import com.gyonnmi.myroutine.service.UserService;
+
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
+
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -36,8 +40,7 @@ public class MyPageController {
     public String mypage(Model model, Authentication authentication) {
         User user = getLoginUser(authentication);
 
-        List<Routine> routines =
-        routineRepository.findByUser_IdAndActiveTrueOrderByIdDesc(user.getId());
+        List<Routine> routines = routineRepository.findByUser_IdAndActiveTrueOrderByIdDesc(user.getId());
 
         model.addAttribute("user", user);
         model.addAttribute("routines", routines);
@@ -68,12 +71,17 @@ public class MyPageController {
     }
 
     @PostMapping("/mypage/delete")
-    public String deleteAccount(Authentication authentication) {
+    public String deleteAccount(
+            Authentication authentication,
+            HttpServletRequest request) throws ServletException {
+
         User user = getLoginUser(authentication);
 
         userService.deleteAccount(user.getId());
 
-        return "redirect:/logout";
+        request.logout();
+
+        return "redirect:/login?deleted";
     }
 
     private User getLoginUser(Authentication authentication) {

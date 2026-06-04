@@ -13,6 +13,10 @@
 
         <h1 class="login-title">ログイン</h1>
 
+        <p th:if="${param.deleted}" class="logout-message">
+            退会が完了しました。
+        </p>
+
         <p th:if="${param.error}" class="error-message">
             ユーザーIDまたはパスワードが正しくありません。
         </p>

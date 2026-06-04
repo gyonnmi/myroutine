@@ -1,6 +1,8 @@
 package com.gyonnmi.myroutine.service;
 
 import com.gyonnmi.myroutine.entity.User;
+import com.gyonnmi.myroutine.repository.RoutineLogRepository;
+import com.gyonnmi.myroutine.repository.RoutineRepository;
 import com.gyonnmi.myroutine.repository.UserRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -11,13 +13,19 @@ public class UserService {
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
+    private final RoutineRepository routineRepository;
+    private final RoutineLogRepository routineLogRepository;
 
     // 생성자
     public UserService(
             UserRepository userRepository,
-            PasswordEncoder passwordEncoder) {
+            PasswordEncoder passwordEncoder,
+            RoutineRepository routineRepository,
+            RoutineLogRepository routineLogRepository) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
+        this.routineRepository = routineRepository;
+        this.routineLogRepository = routineLogRepository;
     }
 
     // 회원가입 메서드
@@ -53,6 +61,13 @@ public class UserService {
 
     @Transactional
     public void deleteAccount(Long userId) {
+        // 1. 회원의 루틴 완료 이력 삭제
+        routineLogRepository.deleteByRoutine_User_Id(userId);
+
+        // 2. 회원의 루틴 삭제
+        routineRepository.deleteByUser_Id(userId);
+
+        // 3. 회원 삭제
         userRepository.deleteById(userId);
     }
 }

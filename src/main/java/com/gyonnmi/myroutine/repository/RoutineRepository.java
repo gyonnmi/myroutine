@@ -15,4 +15,6 @@ public interface RoutineRepository extends JpaRepository<Routine, Long> {
 
     // 사용자 ID와 활성화된 루틴을 ID 내림차순으로 가져오는 메서드
     List<Routine> findByUser_IdAndActiveTrueOrderByIdDesc(Long userId);
+
+    void deleteByUser_Id(Long userId);
 }
