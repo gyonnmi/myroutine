@@ -36,7 +36,7 @@ public class RoutineService {
     public List<Routine> getTodayRoutines(Long userId) {
 
         // 오늘의 요일을 문자열로 변환 (예: "MON", "TUE", ...)
-        String today = switch (LocalDate.now().getDayOfWeek()) {
+        String today = switch (getRoutineDate().getDayOfWeek()) {
             case MONDAY -> "MON";
             case TUESDAY -> "TUE";
             case WEDNESDAY -> "WED";
@@ -55,11 +55,11 @@ public class RoutineService {
     }
 
     public List<RoutineLog> getTodayLogs(Long userId) {
-        return routineLogRepository.findByRoutine_User_IdAndRoutineDate(userId, LocalDate.now());
+        return routineLogRepository.findByRoutine_User_IdAndRoutineDate(userId, getRoutineDate());
     }
 
     public int getCompletedCount(Long userId) {
-        return (int) routineLogRepository.countByRoutine_User_IdAndRoutineDate(userId, LocalDate.now());
+        return (int) routineLogRepository.countByRoutine_User_IdAndRoutineDate(userId, getRoutineDate());
     }
 
     public int getAchievementRate(Long userId) {
