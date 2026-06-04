@@ -25,8 +25,13 @@ body {
 
 .header h1 {
   font-size: 28px;
-  color: #e07a67;
+  color: #63514b;
   line-height: 1.4;
+}
+
+.sun-icon {
+    color: #ffb347;
+    text-shadow: 0 0 8px rgba(255, 179, 71, 0.4);
 }
 
 .date {
@@ -600,6 +605,14 @@ h1 {
 
   font-size: 22px;
   cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.sidebar-close:hover {
+  transform: translateY(-2px);
+  background: #ffe0d8;
+  color: #b06e63;
+  box-shadow: 0 6px 12px rgba(197, 138, 125, 0.2);
 }
 
 .sidebar-menu {

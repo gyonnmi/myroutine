@@ -4,6 +4,7 @@ import com.gyonnmi.myroutine.entity.User;
 import com.gyonnmi.myroutine.repository.UserRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class UserService {
@@ -32,5 +33,26 @@ public class UserService {
         user.setNickname(nickname);
 
         userRepository.save(user);
+    }
+
+    @Transactional
+    public void updateNickname(Long userId, String nickname) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new IllegalArgumentException("ユーザーが見つかりません。"));
+
+        user.setNickname(nickname);
+    }
+
+    @Transactional
+    public void updatePassword(Long userId, String password) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new IllegalArgumentException("ユーザーが見つかりません。"));
+
+        user.setPassword(passwordEncoder.encode(password));
+    }
+
+    @Transactional
+    public void deleteAccount(Long userId) {
+        userRepository.deleteById(userId);
     }
 }

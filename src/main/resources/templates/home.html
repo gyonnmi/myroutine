@@ -20,8 +20,12 @@
           2026年5月31日（日）
         </p>
 
-        <h1 th:text="${nickname} + 'さん、おはようございます ☀'">
-          今日のルーティン
+        <h1>
+          <span th:text="${nickname} + 'さん、おはようございます '">
+            キョンミさん、おはようございます
+          </span>
+
+          <span class="sun-icon">☀</span>
         </h1>
       </div>
 
@@ -194,7 +198,7 @@
       <nav class="sidebar-menu">
         <a th:href="@{/}">ホーム</a>
         <a href="#">統計</a>
-        <a href="#">マイページ</a>
+        <a th:href="@{/mypage}">マイページ</a>
       </nav>
 
       <form th:action="@{/logout}" method="post" class="logout-form">

@@ -1,0 +1,335 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: "Noto Sans JP", sans-serif;
+    background: #f8edeb;
+    color: #444;
+}
+
+.mypage-container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 32px 20px;
+}
+
+.mypage-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    margin-bottom: 24px;
+}
+
+.page-label {
+    color: #a0a0a0;
+    font-size: 13px;
+    letter-spacing: 2px;
+    margin-bottom: 6px;
+}
+
+.mypage-header h1 {
+    color: #e07a67;
+    font-size: 30px;
+}
+
+.home-link {
+    text-decoration: none;
+
+    background: white;
+    color: #e07a67;
+
+    padding: 10px 18px;
+
+    border-radius: 14px;
+
+    font-weight: bold;
+
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.05);
+
+    transition: 0.2s;
+}
+
+.home-link:hover {
+    transform: translateY(-2px);
+}
+
+.profile-card,
+.form-card,
+.routine-card,
+.danger-card {
+    background: white;
+
+    border-radius: 22px;
+
+    padding: 24px;
+
+    margin-bottom: 20px;
+
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
+}
+
+.profile-card h2,
+.form-card h2,
+.routine-card h2,
+.danger-card h2 {
+    margin-bottom: 18px;
+    color: #e07a67;
+}
+
+.profile-card p {
+    display: flex;
+    justify-content: space-between;
+
+    padding: 12px 0;
+
+    border-bottom: 1px solid #f1eceb;
+}
+
+.profile-card p:last-child {
+    border-bottom: none;
+}
+
+.profile-card span {
+    color: #888;
+}
+
+.form-card form {
+    display: flex;
+    gap: 10px;
+}
+
+.form-card input {
+    flex: 1;
+
+    padding: 12px;
+
+    border: 1px solid #e6d9d6;
+    border-radius: 12px;
+
+    font-size: 14px;
+}
+
+.form-card input:focus {
+    outline: none;
+
+    border-color: #fb9e8b;
+
+    box-shadow: 0 0 0 4px rgba(251, 158, 139, 0.15);
+}
+
+.form-card button {
+    border: none;
+
+    background: #fb9e8b;
+    color: white;
+
+    padding: 12px 18px;
+
+    border-radius: 12px;
+
+    cursor: pointer;
+
+    font-weight: bold;
+
+    transition: 0.2s;
+}
+
+.form-card button:hover {
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 10px 20px rgba(251, 158, 139, 0.25);
+}
+
+.routine-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.routine-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 16px;
+
+    background: #faf7f6;
+    border-radius: 16px;
+}
+
+.routine-info {
+    flex: 1;
+}
+
+.mypage-weekdays {
+    display: flex;
+    gap: 6px;
+    margin-top: 10px;
+    flex-wrap: wrap;
+}
+
+.mypage-weekdays span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 32px;
+    height: 32px;
+
+    border-radius: 50%;
+
+    background: #f1e8e5;
+    color: #a28b84;
+
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.mypage-weekdays span.selected {
+    background: #fb9e8b;
+    color: white;
+
+    box-shadow: 0 4px 10px rgba(251, 158, 139, 0.25);
+}
+
+.routine-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.trash-button {
+    border: none;
+
+    width: 38px;
+    height: 38px;
+
+    border-radius: 50%;
+
+    background: #fff1f1;
+
+    font-size: 17px;
+
+    cursor: pointer;
+
+    transition: all 0.2s ease;
+}
+
+.trash-button:hover {
+    transform: translateY(-2px);
+
+    background: #ffe4e4;
+
+    box-shadow: 0 6px 14px rgba(216, 92, 92, 0.18);
+}
+
+.danger-card p {
+    color: #777;
+    margin-bottom: 16px;
+}
+
+.delete-button {
+    width: 100%;
+
+    border: none;
+
+    padding: 14px;
+
+    border-radius: 14px;
+
+    background: #e57373;
+    color: white;
+
+    font-size: 15px;
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+.delete-button:hover {
+    background: #d85c5c;
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 10px 20px rgba(216, 92, 92, 0.25);
+}
+
+@media (max-width: 768px) {
+
+    .mypage-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 14px;
+    }
+
+    .form-card form {
+        flex-direction: column;
+    }
+
+    .routine-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+}
+
+/* =========================
+   Toast Message
+========================= */
+
+.toast {
+    position: fixed;
+
+    bottom: 24px;
+    right: 24px;
+
+    background: white;
+    color: #5c4a45;
+
+    padding: 16px 22px;
+
+    border-radius: 16px;
+
+    box-shadow:
+        0 12px 30px rgba(0, 0, 0, 0.12);
+
+    font-weight: 600;
+
+    z-index: 9999;
+
+    animation:
+        toastSlideIn 0.4s ease,
+        toastFadeOut 0.4s ease 2.6s forwards;
+}
+
+@keyframes toastSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes toastFadeOut {
+    from {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+}

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>マイページ</title>
+    <link rel="stylesheet" th:href="@{/css/mypage.css}">
+</head>
+
+<body>
+
+    <div class="mypage-container">
+
+        <header class="mypage-header">
+            <div>
+                <p class="page-label">MY PAGE</p>
+                <h1 th:text="${user.nickname} + 'さんのマイページ'">
+                    マイページ
+                </h1>
+            </div>
+
+            <a th:href="@{/}" class="home-link">ホームへ</a>
+        </header>
+
+        <section class="profile-card">
+            <h2>ユーザー情報</h2>
+
+            <p>
+                <span>ユーザーID</span>
+                <strong th:text="${user.username}">username</strong>
+            </p>
+
+            <p>
+                <span>ニックネーム</span>
+                <strong th:text="${user.nickname}">nickname</strong>
+            </p>
+        </section>
+
+        <section class="form-card">
+            <h2>ニックネーム変更</h2>
+
+            <form th:action="@{/mypage/nickname}" method="post">
+                <input type="text" name="nickname" placeholder="新しいニックネーム" required>
+                <button type="submit">変更する</button>
+            </form>
+        </section>
+
+        <section class="form-card">
+            <h2>パスワード変更</h2>
+
+            <form th:action="@{/mypage/password}" method="post">
+                <input type="password" name="password" placeholder="新しいパスワード" required>
+                <button type="submit">変更する</button>
+            </form>
+        </section>
+
+        <section class="routine-card">
+            <h2>登録したルーティン一覧</h2>
+
+            <div class="routine-list">
+                <div class="routine-row" th:each="routine : ${routines}">
+
+                    <div class="routine-info">
+                        <strong th:text="${routine.title}">ルーティン名</strong>
+                        <p th:text="${routine.description}">説明</p>
+
+                        <div class="mypage-weekdays">
+                            <span th:classappend="${#strings.contains(routine.repeatDays, 'MON')} ? 'selected'">月</span>
+                            <span th:classappend="${#strings.contains(routine.repeatDays, 'TUE')} ? 'selected'">火</span>
+                            <span th:classappend="${#strings.contains(routine.repeatDays, 'WED')} ? 'selected'">水</span>
+                            <span th:classappend="${#strings.contains(routine.repeatDays, 'THU')} ? 'selected'">木</span>
+                            <span th:classappend="${#strings.contains(routine.repeatDays, 'FRI')} ? 'selected'">金</span>
+                            <span th:classappend="${#strings.contains(routine.repeatDays, 'SAT')} ? 'selected'">土</span>
+                            <span th:classappend="${#strings.contains(routine.repeatDays, 'SUN')} ? 'selected'">日</span>
+                        </div>
+                    </div>
+
+                    <div class="routine-actions">
+
+                        <form th:if="${routine.active}" th:action="@{/mypage/routines/{id}/delete(id=${routine.id})}"
+                            method="post" onsubmit="return confirm('このルーティンを削除しますか？');">
+
+                            <button type="submit" class="trash-button" title="削除">
+                                🗑️
+                            </button>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <section class="danger-card">
+            <h2>会員退会</h2>
+            <p>退会すると、登録情報が削除されます。</p>
+
+            <form th:action="@{/mypage/delete}" method="post">
+                <button type="submit" class="delete-button" onclick="return confirm('本当に退会しますか？');">
+                    退会する
+                </button>
+            </form>
+        </section>
+
+    </div>
+
+    <div id="toast" class="toast" th:if="${param.toast}">
+
+        <span th:if="${param.toast[0] == 'nickname'}">
+            🌸 ニックネームが変更されました。
+        </span>
+
+        <span th:if="${param.toast[0] == 'password'}">
+            🔒 パスワードが変更されました。
+        </span>
+
+    </div>
+
+    <script>
+        const toast = document.getElementById('toast');
+
+        if (toast) {
+            setTimeout(() => {
+                toast.remove();
+            }, 3000);
+        }
+    </script>
+</body>
+
+</html>
