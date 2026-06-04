@@ -23,6 +23,12 @@ body {
   margin-bottom: 24px;
 }
 
+.header h1 {
+  font-size: 28px;
+  color: #e07a67;
+  line-height: 1.4;
+}
+
 .date {
   color: #7b8190;
   font-size: 14px;

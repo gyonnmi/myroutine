@@ -1,9 +1,12 @@
 package com.gyonnmi.myroutine.controller;
 
+import com.gyonnmi.myroutine.entity.User;
+import com.gyonnmi.myroutine.repository.UserRepository;
 import com.gyonnmi.myroutine.service.RoutineService;
 
 import java.util.List;
 
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,10 +17,15 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class RoutineController {
 
     private final RoutineService routineService;
+    private final UserRepository userRepository;
 
     // 생성자 주입 방식으로 RoutineService를 주입받음
-    public RoutineController(RoutineService routineService) {
+    public RoutineController(
+            RoutineService routineService,
+            UserRepository userRepository) {
+
         this.routineService = routineService;
+        this.userRepository = userRepository;
     }
 
     @PostMapping("/routines")
@@ -25,10 +33,20 @@ public class RoutineController {
     public String addRoutine(
             @RequestParam String title,
             @RequestParam(required = false) String description,
-            @RequestParam String repeatDays) {
-        Long userId = 1L; // 실제 애플리케이션에서는 인증된 사용자 ID를 가져와야 함. 임시 데이터
+            @RequestParam String repeatDays,
+            Authentication authentication) {
+        String username = authentication.getName();
 
-        routineService.addRoutine(userId, title, description, repeatDays);
+        User user = userRepository.findByUsername(username)
+                .orElseThrow();
+
+        Long userId = user.getId();
+
+        routineService.addRoutine(
+                userId,
+                title,
+                description,
+                repeatDays);
 
         return "redirect:/";
     }
@@ -60,8 +78,7 @@ public class RoutineController {
     @ResponseBody
     public void updateCompleted(
             @PathVariable Long id,
-            @RequestParam boolean completed
-    ) {
+            @RequestParam boolean completed) {
         routineService.updateRoutineCompleted(id, completed);
     }
 }
