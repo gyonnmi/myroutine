@@ -36,16 +36,21 @@
 
     <!-- 進捗カード -->
     <section class="progress-card">
+
       <div class="progress-info">
-        <span>今日の達成率</span>
+        <span class="progress-label">今日の達成率</span>
 
         <strong id="progressText" th:text="${achievementRate + '%'}">
-          0%
         </strong>
       </div>
 
       <div class="progress-bar">
-        <div class="progress-fill" th:style="'width:' + ${achievementRate} + '%'">
+        <div class="progress-fill" th:style="
+      'width:' + ${achievementRate} + '%;' +
+      'background-color:' +
+      (${achievementRate} < 40 ? '#f7a8a8' :
+      (${achievementRate} < 80 ? '#f8c58b' :
+      '#9fd8b5'))">
         </div>
       </div>
 
@@ -217,6 +222,9 @@
 
     </aside>
 
+  </div>
+
+  <div id="achievementToast" class="achievement-toast">
   </div>
 
   <script th:src="@{/js/home.js}"></script>

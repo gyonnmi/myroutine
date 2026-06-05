@@ -15,7 +15,54 @@ function updateProgress() {
   const percent = total === 0 ? 0 : Math.round((checked / total) * 100);
 
   progressText.textContent = percent + '%';
+
+  if (percent < 40) {
+    progressText.style.color = '#d86b6b';
+  }
+  else if (percent < 80) {
+    progressText.style.color = '#d9943f';
+  }
+  else {
+    progressText.style.color = '#5e9c7a';
+  }
+
   progressFill.style.width = percent + '%';
+
+  if (percent < 40) {
+    progressFill.style.backgroundColor = '#f7a8a8';
+  }
+  else if (percent < 80) {
+    progressFill.style.backgroundColor = '#f8c58b';
+  }
+  else {
+    progressFill.style.backgroundColor = '#9fd8b5';
+  }
+
+  if (percent === 100 && !wasComplete) {
+    wasComplete = true;
+
+    // 달성률 카드 애니메이션
+    const progressCard = document.querySelector('.progress-card');
+
+    progressCard.classList.remove('achievement-complete');
+    void progressCard.offsetWidth;
+    progressCard.classList.add('achievement-complete');
+
+    // 토스트 메시지
+    const toast = document.getElementById('achievementToast');
+
+    toast.textContent = '🌸 今日のルーティンをすべて達成しました！';
+    toast.classList.add('show');
+
+    setTimeout(() => {
+      toast.classList.remove('show');
+    }, 3000);
+  }
+
+  if (percent < 100) {
+    wasComplete = false;
+  }
+
   progressCount.textContent = checked + ' / ' + total + ' 件 完了';
 
   routineItems.forEach((item) => {
