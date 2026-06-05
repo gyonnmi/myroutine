@@ -13,6 +13,9 @@
 
         <h1 class="signup-title">会員登録</h1>
 
+        <div class="error-message" th:if="${errorMessage}" th:text="${errorMessage}">
+        </div>
+
         <form th:action="@{/signup}" method="post">
 
             <div class="form-group">

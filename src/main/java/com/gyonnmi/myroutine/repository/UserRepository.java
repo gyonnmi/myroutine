@@ -9,4 +9,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     // 사용자 이름으로 사용자 정보를 가져오는 메서드
     Optional<User> findByUsername(String username);
+
+    // 사용자 이름이 이미 존재하는지 확인하는 메서드
+    boolean existsByUsername(String username);
 }

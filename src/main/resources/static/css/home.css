@@ -30,8 +30,8 @@ body {
 }
 
 .sun-icon {
-    color: #ffb347;
-    text-shadow: 0 0 8px rgba(255, 179, 71, 0.4);
+  color: #ffb347;
+  text-shadow: 0 0 8px rgba(255, 179, 71, 0.4);
 }
 
 .date {
@@ -120,12 +120,29 @@ h1 {
   transform: translateY(-2px);
 }
 
-.routine-item label {
+.routine-content {
   display: flex;
   align-items: center;
   gap: 16px;
+}
+
+.check-area {
+  display: flex;
+  align-items: center;
   cursor: pointer;
-  width: 100%;
+  flex-shrink: 0;
+}
+
+.routine-info {
+  flex: 1;
+}
+
+.routine-title {
+  cursor: pointer;
+}
+
+.routine-title:hover {
+  color: #fb9e8b;
 }
 
 .routine-item input {

@@ -59,11 +59,16 @@
     <main class="routine-list">
       <article class="routine-item" th:each="routine : ${routines}"
         th:classappend="${completedRoutineIds.contains(routine.id)} ? 'completed'">
-        <label>
+
+        <div class="routine-content">
+
           <!-- チェックボックス -->
-          <input type="checkbox" class="routine-checkbox" th:data-id="${routine.id}"
-            th:checked="${completedRoutineIds.contains(routine.id)}">
-          <span class="checkmark"></span>
+          <label class="check-area">
+            <input type="checkbox" class="routine-checkbox" th:data-id="${routine.id}"
+              th:checked="${completedRoutineIds.contains(routine.id)}">
+
+            <span class="checkmark"></span>
+          </label>
 
           <!-- ルーティン情報 -->
           <div class="routine-info">
@@ -80,10 +85,11 @@
 
           <!-- 繰り返し曜日 -->
           <div class="day-list">
-            <span th:class="'day-badge day-' + ${day}" th:each="day : ${routine.dayList}" th:text="${day}">
+            <span th:each="day : ${routine.dayList}" th:class="'day-badge day-' + ${day}" th:text="${day}">
             </span>
           </div>
-        </label>
+
+        </div>
 
       </article>
     </main>

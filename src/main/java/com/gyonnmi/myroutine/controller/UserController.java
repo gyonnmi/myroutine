@@ -2,6 +2,7 @@ package com.gyonnmi.myroutine.controller;
 
 import com.gyonnmi.myroutine.service.UserService;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -26,10 +27,23 @@ public class UserController {
     public String signup( // 회원가입 처리 메서드
             @RequestParam String username,
             @RequestParam String password,
-            @RequestParam String nickname) {
-        userService.signup(username, password, nickname); // UserService의 회원가입 메서드 호출하여 사용자 등록 처리
+            @RequestParam String nickname,
+            Model model) {
+        try { 
 
-        return "redirect:/login";
+            userService.signup(
+                    username,
+                    password,
+                    nickname);
+
+            return "redirect:/login";
+
+        } catch (IllegalArgumentException e) { // 회원가입 실패 시 예외 처리
+
+            model.addAttribute("errorMessage", e.getMessage());
+
+            return "signup";
+        }
     }
 
     @GetMapping("/login")
