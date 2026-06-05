@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class UserService {
 
+    // 필드
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final RoutineRepository routineRepository;

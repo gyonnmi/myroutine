@@ -26,7 +26,7 @@ public class Routine {
     @JoinColumn(name = "user_id") // user_id 컬럼을 외래키(FK)로 사용
     private User user;
 
-    public List<String> getDayList() {
+    public List<String> getDayList() { // repeatDays 문자열을 요일 리스트로 변환
         return Arrays.stream(repeatDays.split(","))
                 .map(day -> switch (day) {
                     case "MON" -> "月";

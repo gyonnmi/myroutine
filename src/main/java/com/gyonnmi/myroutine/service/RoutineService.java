@@ -18,11 +18,12 @@ import jakarta.persistence.PersistenceContext;
 
 @Service
 public class RoutineService {
+    // 필드
     private final RoutineRepository routineRepository;
     private final RoutineLogRepository routineLogRepository;
 
-    @PersistenceContext
-    private EntityManager entityManager; // 스프링 컨테이너로부터 EntityManager를 주입받음
+    @PersistenceContext // EntityManager를 주입받기 위한 어노테이션
+    private EntityManager entityManager;
 
     // 생성자
     public RoutineService(
@@ -54,14 +55,17 @@ public class RoutineService {
                 .toList();
     }
 
+    // 오늘 완료된 루틴 목록을 가져오는 메서드
     public List<RoutineLog> getTodayLogs(Long userId) {
         return routineLogRepository.findByRoutine_User_IdAndRoutineDate(userId, getRoutineDate());
     }
 
+    // 오늘 완료된 루틴의 개수를 가져오는 메서드
     public int getCompletedCount(Long userId) {
         return (int) routineLogRepository.countByRoutine_User_IdAndRoutineDate(userId, getRoutineDate());
     }
 
+    // 오늘의 루틴 달성률을 계산하는 메서드
     public int getAchievementRate(Long userId) {
         int totalCount = getTodayRoutines(userId).size();
         int completedCount = getCompletedCount(userId);
@@ -123,6 +127,7 @@ public class RoutineService {
                 .toLocalDate();
     }
 
+    // 루틴이 오늘 완료되었는지 여부를 확인하는 메서드
     public boolean isCompletedToday(Long routineId) {
         return routineLogRepository.existsByRoutine_IdAndRoutineDate(
                 routineId,

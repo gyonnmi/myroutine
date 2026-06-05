@@ -10,8 +10,10 @@ import org.springframework.stereotype.Service;
 @Service
 public class CustomUserDetailsService implements UserDetailsService {
 
+    // 필드
     private final UserRepository userRepository;
 
+    // 생성자
     public CustomUserDetailsService(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
@@ -24,11 +26,13 @@ public class CustomUserDetailsService implements UserDetailsService {
      */
     @Override
     public UserDetails loadUserByUsername(String username)
-            throws UsernameNotFoundException {
+            throws UsernameNotFoundException { // username이 DB에 존재하지 않을 때 예외 발생
 
+        // 사용자 이름으로 사용자 정보를 가져오는 메서드
         User user = userRepository.findByUsername(username)
                 .orElseThrow(() -> new UsernameNotFoundException("ユーザーが見つかりません。"));
 
+        // User 엔티티의 username과 password를 사용하여 UserDetails 객체를 생성하여 반환
         return org.springframework.security.core.userdetails.User
                 .withUsername(user.getUsername())
                 .password(user.getPassword())
