@@ -233,6 +233,31 @@ body {
     margin-bottom: 16px;
 }
 
+.edit-routine-button {
+    border: none;
+
+    width: 38px;
+    height: 38px;
+
+    border-radius: 50%;
+
+    background: #fff3e8;
+
+    font-size: 16px;
+
+    cursor: pointer;
+
+    transition: all 0.2s ease;
+}
+
+.edit-routine-button:hover {
+    transform: translateY(-2px);
+
+    background: #ffe6c7;
+
+    box-shadow: 0 6px 14px rgba(217, 148, 63, 0.18);
+}
+
 .delete-button {
     width: 100%;
 
@@ -281,6 +306,276 @@ body {
         gap: 10px;
     }
 
+}
+
+/* =========================
+   マイページ ルーティン編集モーダル
+========================= */
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+
+    background: rgba(43, 34, 38, 0.35);
+
+    display: none;
+    justify-content: center;
+    align-items: center;
+
+    padding: 20px;
+
+    z-index: 9999;
+}
+
+.modal-overlay.active {
+    display: flex;
+}
+
+.modal-content {
+    width: 100%;
+    max-width: 520px;
+
+    background: #ffffff;
+
+    border-radius: 24px;
+
+    padding: 28px;
+
+    box-shadow: 0 20px 40px rgba(43, 34, 38, 0.18);
+
+    animation: modalFadeIn 0.25s ease;
+}
+
+@keyframes modalFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(12px) scale(0.98);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    margin-bottom: 24px;
+}
+
+.modal-header h2 {
+    font-size: 24px;
+    color: #444;
+}
+
+.modal-close {
+    border: none;
+
+    width: 36px;
+    height: 36px;
+
+    border-radius: 50%;
+
+    background: #fff1ed;
+    color: #c58a7d;
+
+    font-size: 24px;
+    line-height: 1;
+
+    cursor: pointer;
+
+    transition: all 0.2s ease;
+}
+
+.modal-close:hover {
+    background: #ffe3dc;
+    transform: translateY(-2px);
+}
+
+.routine-form {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.form-group label {
+    font-size: 14px;
+    font-weight: bold;
+    color: #5c4a45;
+}
+
+.form-group input[type="text"],
+.form-group textarea {
+    width: 100%;
+
+    border: 1px solid #f1d0c8;
+    border-radius: 14px;
+
+    padding: 12px 14px;
+
+    font-size: 15px;
+    font-family: inherit;
+
+    outline: none;
+
+    transition: all 0.2s ease;
+}
+
+.form-group textarea {
+    min-height: 90px;
+    resize: vertical;
+}
+
+.form-group input[type="text"]:focus,
+.form-group textarea:focus {
+    border-color: #fb9e8b;
+    box-shadow: 0 0 0 3px rgba(251, 158, 139, 0.18);
+}
+
+/* =========================
+   曜日選択ボタン
+========================= */
+
+.weekday-group {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.weekday {
+    cursor: pointer;
+}
+
+.weekday input[type="checkbox"] {
+    display: none;
+}
+
+.weekday span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 42px;
+    height: 42px;
+
+    border-radius: 50%;
+
+    background: #f8f1ef;
+    color: #7b625c;
+
+    font-size: 14px;
+    font-weight: bold;
+
+    transition: all 0.25s ease;
+}
+
+.weekday:hover span {
+    transform: translateY(-2px);
+
+    background: #fff1ed;
+
+    box-shadow: 0 6px 12px rgba(251, 158, 139, 0.15);
+}
+
+.weekday input[type="checkbox"]:checked+span {
+    background: #fb9e8b;
+    color: white;
+
+    box-shadow: 0 8px 16px rgba(251, 158, 139, 0.3);
+}
+
+.weekday:active span {
+    transform: translateY(0);
+}
+
+/* =========================
+   モーダル下部ボタン
+========================= */
+
+.modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+
+    margin-top: 8px;
+}
+
+.cancel-button,
+.submit-button {
+    border: none;
+
+    padding: 11px 16px;
+
+    border-radius: 14px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: all 0.25s ease;
+}
+
+.cancel-button {
+    background: #f6f1ef;
+    color: #7b625c;
+}
+
+.cancel-button:hover {
+    transform: translateY(-2px);
+
+    background: #efe7e4;
+
+    box-shadow: 0 6px 12px rgba(123, 98, 92, 0.12);
+}
+
+.submit-button {
+    background: #fb9e8b;
+    color: white;
+
+    box-shadow: 0 8px 18px rgba(251, 158, 139, 0.28);
+}
+
+.submit-button:hover {
+    transform: translateY(-2px);
+
+    background: #f88e79;
+
+    box-shadow: 0 12px 24px rgba(251, 158, 139, 0.35);
+
+    filter: brightness(1.03);
+}
+
+.cancel-button:active,
+.submit-button:active {
+    transform: translateY(0);
+}
+
+/* =========================
+   レスポンシブ
+========================= */
+
+@media (max-width: 600px) {
+    .modal-content {
+        padding: 24px;
+    }
+
+    .weekday span {
+        width: 38px;
+        height: 38px;
+    }
 }
 
 /* Sidebar */

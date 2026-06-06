@@ -102,4 +102,15 @@ public class MyPageController {
 
         return "redirect:/mypage";
     }
+
+    @PostMapping("/mypage/routines/{id}/edit")
+    public String updateRoutineFromMyPage(
+            @PathVariable Long id,
+            @RequestParam String title,
+            @RequestParam(required = false) String description,
+            @RequestParam String repeatDays) {
+        routineService.updateRoutine(id, title, description, repeatDays);
+
+        return "redirect:/mypage";
+    }
 }
