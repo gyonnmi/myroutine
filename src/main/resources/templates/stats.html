@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>統計</title>
+    <link rel="stylesheet" th:href="@{/css/common.css}">
+    <link rel="stylesheet" th:href="@{/css/stats.css}">
+</head>
+
+<body>
+
+    <div class="stats-container">
+
+        <header class="stats-header">
+            <div>
+                <p class="page-label">STATISTICS</p>
+                <h1>ルーティン達成状況</h1>
+            </div>
+
+            <a th:href="@{/}" class="home-link">ホームへ</a>
+        </header>
+
+        <section class="summary-grid">
+            <div class="summary-card">
+                <span>今週の達成率</span>
+                <strong>72%</strong>
+            </div>
+
+            <div class="summary-card">
+                <span>今月の達成率</span>
+                <strong>68%</strong>
+            </div>
+
+            <div class="summary-card">
+                <span>総完了回数</span>
+                <strong>128回</strong>
+            </div>
+        </section>
+
+        <section class="calendar-card">
+            <div class="calendar-header">
+                <h2>2026年6月</h2>
+
+                <div class="calendar-legend">
+                    <span><i class="legend none"></i>未達成</span>
+                    <span><i class="legend low"></i>〜40%</span>
+                    <span><i class="legend middle"></i>〜80%</span>
+                    <span><i class="legend high"></i>80%以上</span>
+                </div>
+            </div>
+
+            <div class="calendar-weekdays">
+                <span>月</span>
+                <span>火</span>
+                <span>水</span>
+                <span>木</span>
+                <span>金</span>
+                <span>土</span>
+                <span>日</span>
+            </div>
+
+            <div class="calendar-grid">
+                <button class="calendar-day empty"></button>
+                <button class="calendar-day low">1</button>
+                <button class="calendar-day middle">2</button>
+                <button class="calendar-day high selected">3</button>
+                <button class="calendar-day none">4</button>
+                <button class="calendar-day high">5</button>
+                <button class="calendar-day middle">6</button>
+                <button class="calendar-day low">7</button>
+                <button class="calendar-day high">8</button>
+                <button class="calendar-day none">9</button>
+                <button class="calendar-day middle">10</button>
+                <button class="calendar-day high">11</button>
+                <button class="calendar-day low">12</button>
+                <button class="calendar-day none">13</button>
+                <button class="calendar-day high">14</button>
+            </div>
+        </section>
+
+        <section class="daily-detail-card">
+            <div class="daily-detail-header">
+                <div>
+                    <p class="detail-date">2026年6月3日</p>
+                    <h2>この日のルーティン</h2>
+                </div>
+
+                <strong class="daily-rate high-text">100%</strong>
+            </div>
+
+            <div class="daily-routine-list">
+                <div class="daily-routine completed">
+                    <span class="status-dot"></span>
+                    <div>
+                        <strong>朝のストレッチ</strong>
+                        <p>10分間体を動かす</p>
+                    </div>
+                </div>
+
+                <div class="daily-routine completed">
+                    <span class="status-dot"></span>
+                    <div>
+                        <strong>読書</strong>
+                        <p>技術書を20分読む</p>
+                    </div>
+                </div>
+
+                <div class="daily-routine incomplete">
+                    <span class="status-dot"></span>
+                    <div>
+                        <strong>Java学習</strong>
+                        <p>Spring Bootを勉強する</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <div th:replace="~{fragments/sidebar :: sidebar}">
+    </div>
+
+</body>
+
+</html>

@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>マイページ</title>
+    <link rel="stylesheet" th:href="@{/css/common.css}">
     <link rel="stylesheet" th:href="@{/css/mypage.css}">
 </head>
 
@@ -185,40 +186,7 @@
     </div>
 
     <!-- サイドバー -->
-    <div class="sidebar-container">
-
-        <button class="sidebar-toggle" id="sidebarToggle">
-            ☰
-        </button>
-
-        <div class="sidebar-overlay" id="sidebarOverlay"></div>
-
-        <aside class="sidebar" id="sidebar">
-
-            <div class="sidebar-header">
-                <h2>メニュー</h2>
-
-                <button class="sidebar-close" id="sidebarClose">
-                    ×
-                </button>
-            </div>
-
-            <nav class="sidebar-menu">
-                <a th:href="@{/}">ホーム</a>
-                <a href="#">統計</a>
-                <a th:href="@{/mypage}">マイページ</a>
-            </nav>
-
-            <form th:action="@{/logout}" method="post" class="logout-form">
-
-                <button type="submit" class="logout-button">
-                    ログアウト
-                </button>
-
-            </form>
-
-        </aside>
-
+    <div th:replace="~{fragments/sidebar :: sidebar}">
     </div>
 
     <div id="toast" class="toast" th:if="${param.toast}">

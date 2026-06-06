@@ -7,6 +7,8 @@ const progressCount = document.querySelector('.progress-count');
 // 루틴 카드 전체 요소들
 const routineItems = document.querySelectorAll('.routine-item');
 
+let wasComplete = false;
+
 // 체크된 루틴 수를 계산하여 진행률을 갱신하는 함수
 function updateProgress() {
   const total = checkboxes.length;
