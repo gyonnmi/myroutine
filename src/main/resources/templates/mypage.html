@@ -10,9 +10,9 @@
 
 <body>
 
-    <div class="mypage-container">
+    <div class="container">
 
-        <header class="mypage-header">
+        <header class="header">
             <div>
                 <p class="page-label">MY PAGE</p>
                 <h1 th:text="${user.nickname} + 'さんのマイページ'">
@@ -201,6 +201,7 @@
 
     </div>
 
+    <script th:src="@{/js/common.js}"></script>
     <script th:src="@{/js/mypage.js}"></script>
 </body>
 

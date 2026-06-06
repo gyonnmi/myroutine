@@ -10,6 +10,19 @@ body {
     color: #222;
 }
 
+.container {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 32px 20px;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+}
+
 .routine-form {
     display: flex;
     flex-direction: column;
@@ -442,8 +455,7 @@ body {
 }
 
 .cancel-button:active,
-.submit-button:active 
-.delete-button:active {
+.submit-button:active .delete-button:active {
     transform: translateY(0);
 }
 
@@ -462,7 +474,7 @@ body {
     .modal-content {
         padding: 24px;
     }
-    
+
     .weekday span {
         width: 38px;
         height: 38px;
