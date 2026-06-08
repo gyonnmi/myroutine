@@ -18,10 +18,10 @@ function updateProgress() {
 
   progressText.textContent = percent + '%';
 
-  if (percent < 40) {
+  if (percent < 41) {
     progressText.style.color = '#d86b6b';
   }
-  else if (percent < 80) {
+  else if (percent < 81) {
     progressText.style.color = '#d9943f';
   }
   else {
@@ -30,10 +30,10 @@ function updateProgress() {
 
   progressFill.style.width = percent + '%';
 
-  if (percent < 40) {
+  if (percent < 41) {
     progressFill.style.backgroundColor = '#f7a8a8';
   }
-  else if (percent < 80) {
+  else if (percent < 81) {
     progressFill.style.backgroundColor = '#f8c58b';
   }
   else {
