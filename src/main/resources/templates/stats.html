@@ -61,21 +61,16 @@
             </div>
 
             <div class="calendar-grid">
-                <button class="calendar-day empty"></button>
-                <button class="calendar-day low">1</button>
-                <button class="calendar-day middle">2</button>
-                <button class="calendar-day high selected">3</button>
-                <button class="calendar-day none">4</button>
-                <button class="calendar-day high">5</button>
-                <button class="calendar-day middle">6</button>
-                <button class="calendar-day low">7</button>
-                <button class="calendar-day high">8</button>
-                <button class="calendar-day none">9</button>
-                <button class="calendar-day middle">10</button>
-                <button class="calendar-day high">11</button>
-                <button class="calendar-day low">12</button>
-                <button class="calendar-day none">13</button>
-                <button class="calendar-day high">14</button>
+
+                <button th:each="day : ${calendarDays}" th:text="${day.date.dayOfMonth}" th:classappend="
+                    ${day.achievementRate == 0} ? 'calendar-day none' :
+                    (${day.achievementRate <= 40} ? 'calendar-day low' :
+                    (${day.achievementRate < 80} ? 'calendar-day middle' :
+                    'calendar-day high'))
+                ">
+                </button>
+                </button>
+
             </div>
         </section>
 

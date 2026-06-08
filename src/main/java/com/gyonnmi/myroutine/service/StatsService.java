@@ -1,5 +1,6 @@
 package com.gyonnmi.myroutine.service;
 
+import com.gyonnmi.myroutine.dto.CalendarDayDto;
 import com.gyonnmi.myroutine.entity.Routine;
 import com.gyonnmi.myroutine.repository.RoutineLogRepository;
 import com.gyonnmi.myroutine.repository.RoutineRepository;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Service;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.temporal.TemporalAdjusters;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -125,5 +127,49 @@ public class StatsService {
             case SATURDAY -> "SAT";
             case SUNDAY -> "SUN";
         };
+    }
+
+    public List<CalendarDayDto> getCalendarDays(
+            Long userId) {
+
+        LocalDate today = routineService.getRoutineDate();
+
+        LocalDate firstDay = today.withDayOfMonth(1);
+
+        LocalDate lastDay = today.withDayOfMonth(
+                today.lengthOfMonth());
+
+        List<CalendarDayDto> result = new ArrayList<>();
+
+        LocalDate current = firstDay;
+
+        while (!current.isAfter(lastDay)) {
+            int achievementRate = getDailyAchievementRate(userId, current);
+
+            result.add(
+                    new CalendarDayDto(
+                            current,
+                            achievementRate));
+
+            current = current.plusDays(1);
+        }
+
+        return result;
+    }
+
+    // 날짜별 달성률 계산 메서드
+    private int getDailyAchievementRate(Long userId, LocalDate date) {
+
+        long completedCount = routineLogRepository.countByRoutine_User_IdAndRoutineDate(
+                userId,
+                date);
+
+        long targetCount = countTargetRoutines(userId, date, date);
+
+        if (targetCount == 0) {
+            return 0;
+        }
+
+        return (int) Math.round((double) completedCount / targetCount * 100);
     }
 }

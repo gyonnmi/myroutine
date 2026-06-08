@@ -43,6 +43,9 @@ public class StatsController {
         model.addAttribute("weekAchievementRate", weekAchievementRate);
         model.addAttribute("monthAchievementRate", monthAchievementRate);
         model.addAttribute("totalCompletedCount", totalCompletedCount);
+        model.addAttribute(
+                "calendarDays",
+                statsService.getCalendarDays(userId));
 
         return "stats";
     }
