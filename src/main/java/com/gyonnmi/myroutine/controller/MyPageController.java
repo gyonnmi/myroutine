@@ -52,6 +52,7 @@ public class MyPageController {
         return "mypage";
     }
 
+    // 닉네임 변경 메서드
     @PostMapping("/mypage/nickname")
     public String updateNickname(
             @RequestParam String nickname,
@@ -63,6 +64,7 @@ public class MyPageController {
         return "redirect:/mypage?toast=nickname";
     }
 
+    // 비밀번호 변경 메서드
     @PostMapping("/mypage/password")
     public String updatePassword(
             @RequestParam String password,
@@ -74,6 +76,7 @@ public class MyPageController {
         return "redirect:/mypage?toast=password";
     }
 
+    // 회원 탈퇴 메서드
     @PostMapping("/mypage/delete")
     public String deleteAccount(
             Authentication authentication,
@@ -88,6 +91,7 @@ public class MyPageController {
         return "redirect:/login?deleted";
     }
 
+    // 현재 로그인한 유저 조회 메서드
     private User getLoginUser(Authentication authentication) {
         String username = authentication.getName(); // 현재 로그인한 사용자의 username(ID) 가져오기
 
@@ -96,6 +100,7 @@ public class MyPageController {
                 .orElseThrow(() -> new IllegalArgumentException("ユーザーが見つかりません。"));
     }
 
+    // 마이페이지 루틴 삭제 메서드
     @PostMapping("/mypage/routines/{id}/delete")
     public String deleteRoutineFromMyPage(@PathVariable Long id) { // 루틴 ID를 경로 변수로 받아서 삭제 처리
         routineService.deleteRoutine(id); // 루틴 ID를 전달하여 루틴 삭제
@@ -103,6 +108,7 @@ public class MyPageController {
         return "redirect:/mypage";
     }
 
+    // 마이페이지 루틴 수정 메서드
     @PostMapping("/mypage/routines/{id}/edit")
     public String updateRoutineFromMyPage(
             @PathVariable Long id,

@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class CustomUserDetailsService implements UserDetailsService {
-
     // 필드
     private final UserRepository userRepository;
 

@@ -27,8 +27,10 @@ public interface RoutineLogRepository extends JpaRepository<RoutineLog, Long> {
     // 특정 사용자의 모든 루틴 수행 기록을 삭제하는 메서드
     void deleteByRoutine_User_Id(Long userId);
 
+    // 특정 사용자의 RoutineLog 개수를 세는 메서드
     long countByRoutine_User_Id(Long userId);
 
+    //특정 사용자의 특정 기간 동안의 RoutineLog 개수를 세는 메서드
     long countByRoutine_User_IdAndRoutineDateBetween(
             Long userId,
             LocalDate startDate,

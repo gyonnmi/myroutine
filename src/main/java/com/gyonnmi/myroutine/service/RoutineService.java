@@ -22,7 +22,7 @@ public class RoutineService {
     private final RoutineRepository routineRepository;
     private final RoutineLogRepository routineLogRepository;
 
-    @PersistenceContext // EntityManager를 주입받기 위한 어노테이션
+    @PersistenceContext
     private EntityManager entityManager;
 
     // 생성자
@@ -121,6 +121,7 @@ public class RoutineService {
         routineRepository.save(routine);
     }
 
+    // 루틴 앱에서 사용할 기준 날짜를 반환하는 메서드
     public LocalDate getRoutineDate() {
         return LocalDateTime.now()
                 .minusHours(4)

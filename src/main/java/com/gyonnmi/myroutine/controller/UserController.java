@@ -19,12 +19,13 @@ public class UserController {
     }
 
     @GetMapping("/signup")
-    public String signupForm() { // 회원가입 페이지로 이동하는 메서드
+    public String signupForm() {
         return "signup";
     }
 
+    //// 회원가입 처리 메서드
     @PostMapping("/signup")
-    public String signup( // 회원가입 처리 메서드
+    public String signup( 
             @RequestParam String username,
             @RequestParam String password,
             @RequestParam String nickname,
@@ -47,7 +48,7 @@ public class UserController {
     }
 
     @GetMapping("/login")
-    public String loginForm() { // 로그인 페이지로 이동하는 메서드
+    public String loginForm() { 
         return "login";
     }
 }

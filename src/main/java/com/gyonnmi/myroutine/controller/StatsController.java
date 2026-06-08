@@ -34,10 +34,13 @@ public class StatsController {
 
         Long userId = user.getId();
 
+        // 이번주 달성률
         int weekAchievementRate = statsService.getWeekAchievementRate(userId);
 
+        // 이번달 달성률
         int monthAchievementRate = statsService.getMonthAchievementRate(userId);
 
+        // 총 완료 횟수
         long totalCompletedCount = statsService.getTotalCompletedCount(userId);
 
         model.addAttribute("weekAchievementRate", weekAchievementRate);
