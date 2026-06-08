@@ -24,17 +24,17 @@
         <section class="summary-grid">
             <div class="summary-card">
                 <span>今週の達成率</span>
-                <strong>72%</strong>
+                <strong th:text="${weekAchievementRate + '%'}"></strong>
             </div>
 
             <div class="summary-card">
                 <span>今月の達成率</span>
-                <strong>68%</strong>
+                <strong th:text="${monthAchievementRate + '%'}"></strong>
             </div>
 
             <div class="summary-card">
                 <span>総完了回数</span>
-                <strong>128回</strong>
+                <strong th:text="${totalCompletedCount + '回'}"></strong>
             </div>
         </section>
 
