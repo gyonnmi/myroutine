@@ -4,6 +4,8 @@ import com.gyonnmi.myroutine.entity.User;
 import com.gyonnmi.myroutine.repository.RoutineLogRepository;
 import com.gyonnmi.myroutine.repository.RoutineRepository;
 import com.gyonnmi.myroutine.repository.UserRepository;
+
+import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -69,5 +71,13 @@ public class UserService {
 
         // 3. 회원 삭제
         userRepository.deleteById(userId);
+    }
+
+    // 로그인 사용자 조회
+    public User getLoginUser(Authentication authentication) {
+        String username = authentication.getName();
+
+        return userRepository.findByUsername(username)
+                .orElseThrow(() -> new IllegalArgumentException("ユーザーが見つかりません。"));
     }
 }

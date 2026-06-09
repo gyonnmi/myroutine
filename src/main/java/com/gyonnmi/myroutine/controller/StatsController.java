@@ -2,8 +2,8 @@ package com.gyonnmi.myroutine.controller;
 
 import com.gyonnmi.myroutine.dto.DailyRoutineDto;
 import com.gyonnmi.myroutine.entity.User;
-import com.gyonnmi.myroutine.repository.UserRepository;
 import com.gyonnmi.myroutine.service.StatsService;
+import com.gyonnmi.myroutine.service.UserService;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -20,24 +20,22 @@ public class StatsController {
 
 	// 필드
 	private final StatsService statsService;
-	private final UserRepository userRepository;
+	private final UserService userService;
 
 	// 생성자
 	public StatsController(
 			StatsService statsService,
-			UserRepository userRepository) {
+			UserService userService) {
 		this.statsService = statsService;
-		this.userRepository = userRepository;
+		this.userService = userService;
 	}
 
 	@GetMapping("/stats")
 	public String stats(
 			Model model,
 			Authentication authentication) {
-		String username = authentication.getName();
 
-		User user = userRepository.findByUsername(username)
-				.orElseThrow();
+		User user = userService.getLoginUser(authentication);
 
 		Long userId = user.getId();
 
@@ -65,10 +63,7 @@ public class StatsController {
 	public List<DailyRoutineDto> getDailyRoutines(
 			@RequestParam LocalDate date,
 			Authentication authentication) {
-		String username = authentication.getName();
-
-		User user = userRepository.findByUsername(username)
-				.orElseThrow();
+		User user = userService.getLoginUser(authentication);
 
 		return statsService.getDailyRoutines(user.getId(), date);
 	}

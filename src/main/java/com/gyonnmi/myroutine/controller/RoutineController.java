@@ -1,8 +1,8 @@
 package com.gyonnmi.myroutine.controller;
 
 import com.gyonnmi.myroutine.entity.User;
-import com.gyonnmi.myroutine.repository.UserRepository;
 import com.gyonnmi.myroutine.service.RoutineService;
+import com.gyonnmi.myroutine.service.UserService;
 
 import java.util.List;
 
@@ -18,15 +18,15 @@ public class RoutineController {
 
     // 필드
     private final RoutineService routineService;
-    private final UserRepository userRepository;
+    private final UserService userService;
 
     // 생성자
     public RoutineController(
             RoutineService routineService,
-            UserRepository userRepository) {
+            UserService userService) {
 
         this.routineService = routineService;
-        this.userRepository = userRepository;
+        this.userService = userService;
     }
 
     // 새로운 루틴을 추가하는 메서드
@@ -36,10 +36,8 @@ public class RoutineController {
             @RequestParam(required = false) String description,
             @RequestParam String repeatDays,
             Authentication authentication) {
-        String username = authentication.getName(); // 현재 로그인한 사용자의 username(ID) 가져오기
 
-        User user = userRepository.findByUsername(username)
-                .orElseThrow(); // username으로 User 엔티티 조회, 없으면 예외 발생
+        User user = userService.getLoginUser(authentication);
 
         Long userId = user.getId(); // User 엔티티에서 사용자 ID 가져오기
 

@@ -2,8 +2,8 @@ package com.gyonnmi.myroutine.controller;
 
 import com.gyonnmi.myroutine.entity.Routine;
 import com.gyonnmi.myroutine.entity.User;
-import com.gyonnmi.myroutine.repository.UserRepository;
 import com.gyonnmi.myroutine.service.RoutineService;
+import com.gyonnmi.myroutine.service.UserService;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -20,23 +20,20 @@ public class HomeController {
 
     // 필드
     private final RoutineService routineService; // 루틴 관련 비즈니스 로직을 처리하는 서비스
-    private final UserRepository userRepository; // 사용자 정보를 데이터베이스에서 조회하기 위한 리포지토리
+    private final UserService userService;
 
     // 생성자
     public HomeController(
             RoutineService routineService,
-            UserRepository userRepository) {
+            UserService userService) {
 
         this.routineService = routineService;
-        this.userRepository = userRepository;
+        this.userService = userService;
     }
 
     @GetMapping("/")
     public String home(Model model, Authentication authentication) {
-        String username = authentication.getName(); // 현재 로그인한 사용자의 username(ID) 가져오기
-
-        User user = userRepository.findByUsername(username)
-                .orElseThrow(); // username으로 User 엔티티 조회, 없으면 예외 발생
+        User user = userService.getLoginUser(authentication);
 
         Long userId = user.getId(); // User 엔티티에서 사용자 ID 가져오기
 
