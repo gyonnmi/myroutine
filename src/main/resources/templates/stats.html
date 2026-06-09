@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>統計</title>
+    <title>統計ページ</title>
     <link rel="stylesheet" th:href="@{/css/common.css}">
     <link rel="stylesheet" th:href="@{/css/stats.css}">
 </head>
@@ -62,61 +62,53 @@
 
             <div class="calendar-grid">
 
-                <button th:each="day : ${calendarDays}" th:text="${day.date.dayOfMonth}" th:classappend="
+                <button th:each="day : ${calendarDays}" th:text="${day.date.dayOfMonth}" th:data-date="${day.date}"
+                    th:data-rate="${day.achievementRate}" th:classappend="
                     ${day.achievementRate == 0} ? 'calendar-day none' :
                     (${day.achievementRate <= 40} ? 'calendar-day low' :
                     (${day.achievementRate < 80} ? 'calendar-day middle' :
                     'calendar-day high'))
                 ">
                 </button>
-                </button>
 
             </div>
         </section>
 
-        <section class="daily-detail-card">
-            <div class="daily-detail-header">
+
+    </div>
+
+    <div class="modal-overlay" id="dailyDetailModal">
+        <div class="modal-content daily-modal-content">
+
+            <div class="modal-header">
                 <div>
-                    <p class="detail-date">2026年6月3日</p>
+                    <p class="detail-date" id="selectedDateText">
+                        2026年6月3日
+                    </p>
                     <h2>この日のルーティン</h2>
                 </div>
 
-                <strong class="daily-rate high-text">100%</strong>
+                <button class="modal-close" id="closeDailyDetailModal">
+                    ×
+                </button>
             </div>
 
-            <div class="daily-routine-list">
-                <div class="daily-routine completed">
-                    <span class="status-dot"></span>
-                    <div>
-                        <strong>朝のストレッチ</strong>
-                        <p>10分間体を動かす</p>
-                    </div>
-                </div>
+            <strong class="daily-rate" id="selectedDailyRate">
+                100%
+            </strong>
 
-                <div class="daily-routine completed">
-                    <span class="status-dot"></span>
-                    <div>
-                        <strong>読書</strong>
-                        <p>技術書を20分読む</p>
-                    </div>
-                </div>
-
-                <div class="daily-routine incomplete">
-                    <span class="status-dot"></span>
-                    <div>
-                        <strong>Java学習</strong>
-                        <p>Spring Bootを勉強する</p>
-                    </div>
-                </div>
+            <div class="daily-routine-list" id="dailyRoutineList">
+                <!-- JSで表示 -->
             </div>
-        </section>
 
+        </div>
     </div>
 
     <div th:replace="~{fragments/sidebar :: sidebar}">
     </div>
 
     <script th:src="@{/js/common.js}"></script>
+    <script th:src="@{/js/stats.js}"></script>
 </body>
 
 </html>

@@ -1,6 +1,7 @@
 package com.gyonnmi.myroutine.service;
 
 import com.gyonnmi.myroutine.dto.CalendarDayDto;
+import com.gyonnmi.myroutine.dto.DailyRoutineDto;
 import com.gyonnmi.myroutine.entity.Routine;
 import com.gyonnmi.myroutine.repository.RoutineLogRepository;
 import com.gyonnmi.myroutine.repository.RoutineRepository;
@@ -50,7 +51,7 @@ public class StatsService {
         LocalDate endOfWeek = today.with(
                 TemporalAdjusters.nextOrSame(DayOfWeek.SUNDAY));
 
-                // 월요일부터 일요일의 달성률 계산
+        // 월요일부터 일요일의 달성률 계산
         return getAchievementRateBetween(userId, startOfWeek, endOfWeek);
     }
 
@@ -65,7 +66,7 @@ public class StatsService {
         LocalDate endOfMonth = today.withDayOfMonth(
                 today.lengthOfMonth());
 
-                // 이번 달 전체 달성률 계산
+        // 이번 달 전체 달성률 계산
         return getAchievementRateBetween(userId, startOfMonth, endOfMonth);
     }
 
@@ -198,5 +199,28 @@ public class StatsService {
         }
         // 완료 개수 / 목표 개수 * 100 으로 하루 달성률 계산
         return (int) Math.round((double) completedCount / targetCount * 100);
+    }
+
+    public List<DailyRoutineDto> getDailyRoutines(Long userId, LocalDate date) {
+        String day = convertDayOfWeek(date);
+
+        List<Routine> routines = routineRepository.findByUser_IdAndActiveTrue(userId)
+                .stream()
+                .filter(routine -> routine.getRepeatDays() != null)
+                .filter(routine -> Arrays.asList(routine.getRepeatDays().split(",")).contains(day))
+                .toList();
+
+        return routines.stream()
+                .map(routine -> {
+                    boolean completed = routineLogRepository.existsByRoutine_IdAndRoutineDate(
+                            routine.getId(),
+                            date);
+
+                    return new DailyRoutineDto(
+                            routine.getTitle(),
+                            routine.getDescription(),
+                            completed);
+                })
+                .toList();
     }
 }
