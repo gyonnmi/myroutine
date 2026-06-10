@@ -137,3 +137,12 @@ body {
 .login-link a:hover {
     text-decoration: underline;
 }
+
+@media (max-width: 600px) {
+    .signup-container {
+        width: calc(100% - 32px);
+        max-width: none;
+        padding: 28px 24px;
+        box-sizing: border-box;
+    }
+}

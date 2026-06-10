@@ -83,13 +83,12 @@
               ルーティン説明
             </p>
           </div>
-
-          <!-- 繰り返し曜日 -->
-          <div class="day-list">
-            <span th:each="day : ${routine.dayList}" th:class="'day-badge day-' + ${day}" th:text="${day}">
-            </span>
-          </div>
-
+        </div>
+        
+        <!-- 繰り返し曜日 -->
+        <div class="day-list">
+          <span th:each="day : ${routine.dayList}" th:class="'day-badge day-' + ${day}" th:text="${day}">
+          </span>
         </div>
 
       </article>
@@ -187,6 +186,7 @@
   <div th:replace="~{fragments/sidebar :: sidebar}">
   </div>
 
+  <!-- 토스트메세지 -->
   <div id="achievementToast" class="achievement-toast">
   </div>
 

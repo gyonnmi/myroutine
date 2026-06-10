@@ -53,7 +53,7 @@ function updateProgress() {
     // 토스트 메시지
     const toast = document.getElementById('achievementToast');
 
-    toast.textContent = '🌸 今日のルーティンをすべて達成しました！';
+    toast.textContent = '🎉 今日のルーティンをすべて達成しました！';
     toast.classList.add('show');
 
     setTimeout(() => {
