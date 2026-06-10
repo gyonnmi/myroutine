@@ -3,6 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>マイページ</title>
     <link rel="stylesheet" th:href="@{/css/common.css}">
     <link rel="stylesheet" th:href="@{/css/mypage.css}">
@@ -100,7 +101,7 @@
             <h2>会員退会</h2>
             <p>退会すると、登録情報が削除されます。</p>
 
-            <form th:action="@{/mypage/delete}" method="post">
+            <form th:action="@{/mypage/delete}" method="post" class="delete-form">
                 <button type="submit" class="delete-button" onclick="return confirm('本当に退会しますか？');">
                     退会する
                 </button>

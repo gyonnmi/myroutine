@@ -5,11 +5,6 @@
     margin-bottom: 6px;
 }
 
-.header h1 {
-    color: #63514b;
-    font-size: 30px;
-}
-
 .home-link {
     text-decoration: none;
 
@@ -232,13 +227,39 @@
     box-shadow: 0 6px 14px rgba(217, 148, 63, 0.18);
 }
 
-/* Responsive Design */
-@media (max-width: 768px) {
+.delete-form {
+    display: flex;
+    justify-content: flex-end;
+}
 
-    .mypage-header {
+/* Responsive Design */
+@media (max-width: 600px) {
+    .profile-card,
+    .form-card,
+    .routine-card,
+    .danger-card {
+        padding: 16px;
+        margin-bottom: 14px;
+
+        border-radius: 16px;
+
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    }
+
+    .profile-card h2,
+    .form-card h2,
+    .routine-card h2,
+    .danger-card h2 {
+        margin-bottom: 12px;
+        font-size: 18px;
+    }
+
+    .profile-card p {
+        padding: 10px 0;
+
         flex-direction: column;
         align-items: flex-start;
-        gap: 14px;
+        gap: 4px;
     }
 
     .form-card form {
@@ -251,6 +272,51 @@
         gap: 10px;
     }
 
+    .routine-info {
+        width: 100%;
+    }
+
+    .routine-info strong {
+        font-size: 15px;
+    }
+
+    .routine-info p {
+        font-size: 13px;
+        margin-top: 4px;
+    }
+
+    .mypage-weekdays {
+        margin-top: 8px;
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 6px;
+    }
+
+    .routine-actions {
+        width: 100%;
+
+        display: flex;
+        justify-content: flex-end;
+        gap: 8px;
+    }
+
+    .mypage-weekdays span {
+        width: 24px;
+        height: 24px;
+
+        font-size: 11px;
+    }
+
+    .edit-routine-button,
+    .trash-button {
+        width: 36px;
+        height: 36px;
+
+        font-size: 14px;
+    }
+
+    .danger-card p {
+        font-size: 14px;
+    }
 }
-
-

@@ -23,6 +23,11 @@ body {
     margin-bottom: 24px;
 }
 
+.header h1 {
+    color: #63514b;
+    font-size: 30px;
+}
+
 .routine-form {
     display: flex;
     flex-direction: column;
@@ -471,6 +476,14 @@ body {
 }
 
 @media (max-width: 600px) {
+    .header h1 {
+        font-size: 20px;
+    }
+
+    .home-link {
+        display: none;
+    }
+
     .modal-content {
         padding: 24px;
     }
@@ -485,24 +498,21 @@ body {
         right: -300px;
     }
 
-    @media (max-width: 600px) {
-        .sidebar-toggle {
-            top: 16px;
-            right: 16px;
+    .sidebar-toggle {
+        top: 16px;
+        right: 16px;
 
-            width: 36px;
-            height: 36px;
+        width: 36px;
+        height: 36px;
 
-            font-size: 16px;
+        font-size: 16px;
 
-            background: rgba(251, 158, 139, 0.7);
-        }
+        background: rgba(251, 158, 139, 0.7);
+    }
 
-        .achievement-toast {
-            width: 90%;
-            font-size: 14px;
-            
-        }
+    .achievement-toast {
+        width: 90%;
+        font-size: 14px;
     }
 }
 
