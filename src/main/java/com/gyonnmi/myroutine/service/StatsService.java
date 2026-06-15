@@ -197,8 +197,13 @@ public class StatsService {
         if (targetCount == 0) {
             return 0;
         }
+
+        int achievementRate = (int) Math.round(
+                (double) completedCount
+                        / targetCount
+                        * 100);
         // 완료 개수 / 목표 개수 * 100 으로 하루 달성률 계산
-        return (int) Math.round((double) completedCount / targetCount * 100);
+        return Math.min(achievementRate, 100);
     }
 
     public List<DailyRoutineDto> getDailyRoutines(Long userId, LocalDate date) {

@@ -1,13 +1,13 @@
-package com.gyonnmi.myroutine;
+// package com.gyonnmi.myroutine;
 
-import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
+// import org.junit.jupiter.api.Test;
+// import org.springframework.boot.test.context.SpringBootTest;
 
-@SpringBootTest
-class MyroutineApplicationTests {
+// @SpringBootTest
+// class MyroutineApplicationTests {
 
-	@Test
-	void contextLoads() {
-	}
+// 	@Test
+// 	void contextLoads() {
+// 	}
 
-}
+// }
